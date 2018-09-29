@@ -1,0 +1,9 @@
+[Running] node "/Users/shawnchen/Documents/codingdojo/dojoMEAN/preMEAN/userLanguages.js"
+Kermit the Frog knows Python, JavaScript, C#, HTML, CSS, and SQL.
+Kermit the Frog is also interested in guitar, and flute.tap, and salsa.Black Mirror, and Stranger Things.
+Winnie the Pooh knows Python, Swift, and Java.
+Winnie the Pooh is also interested in honey, and honeycomb.and honeysuckle.and Heffalumps.
+Arthur Dent knows JavaScript, HTML, and Go.
+Arthur Dent is also interested in stars, planets, and improbability.tea, and yellow bulldozers.
+
+[Done] exited with code=0 in 0.065 seconds

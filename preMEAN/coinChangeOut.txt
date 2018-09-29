@@ -1,0 +1,29 @@
+
+[Running] node "/Users/shawnchen/Documents/codingdojo/dojoMEAN/preMEAN/coinChange.js"
+{ dollars: 8 }
+{ dollars: 8, quarter: 2 }
+{ dollars: 8, quarter: 2, dimes: 1 }
+{ dollars: 8, quarter: 2, dimes: 1, nickles: 1 }
+{ dollars: 8, quarter: 2, dimes: 1, nickles: 1, pennies: 3 }
+{ dollars: 8, quarter: 2, dimes: 1, nickles: 1, pennies: 3 }
+{ dimes: 1 }
+{ dimes: 1, nickles: 1 }
+{ dimes: 1, nickles: 1, pennies: 3 }
+{ dimes: 1, nickles: 1, pennies: 3 }
+
+[Done] exited with code=0 in 0.058 seconds
+
+[Running] node "/Users/shawnchen/Documents/codingdojo/dojoMEAN/preMEAN/coinChange.js"
+{ dollars: 8 }
+{ dollars: 8, quarter: 2 }
+{ dollars: 8, quarter: 2, dimes: 1 }
+{ dollars: 8, quarter: 2, dimes: 1, nickles: 1 }
+{ dollars: 8, quarter: 2, dimes: 1, nickles: 1, pennies: 3 }
+{ dollars: 8, quarter: 2, dimes: 1, nickles: 1, pennies: 3 }
+{ dollars: 12 }
+{ dollars: 12, dimes: 1 }
+{ dollars: 12, dimes: 1, pennies: 3 }
+{ dollars: 12, dimes: 1, pennies: 3 }
+
+[Done] exited with code=0 in 0.063 seconds
+

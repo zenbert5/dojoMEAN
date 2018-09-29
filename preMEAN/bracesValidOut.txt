@@ -1,0 +1,12 @@
+[Running] node "/Users/shawnchen/Documents/codingdojo/dojoMEAN/preMEAN/bracesValid.js"
+
+::::::: validate braces ::::::
+
+
+{[]} --> true
+[]{}() --> true
+{[[]]}() --> true
+} --> false
+{[(()]} --> false
+
+[Done] exited with code=0 in 0.07 seconds
