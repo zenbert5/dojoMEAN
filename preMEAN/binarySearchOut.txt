@@ -1,0 +1,12 @@
+[Running] node "/Users/shawnchen/Documents/codingdojo/dojoMEAN/preMEAN/binarySearch.js"
+
+The array is:  [ 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 ]
+Index of  8  is  4
+Index of  21  is  6
+Index of  144  is  10
+Index of  7  is  -1
+
+Recursive Method
+Index of  34  is  7
+
+[Done] exited with code=0 in 0.062 seconds
