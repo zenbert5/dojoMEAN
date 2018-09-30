@@ -1,0 +1,148 @@
+<!-- hundred acre woods -->
+
+<script>
+var piglet = { 
+    character: 'Piglet',
+    greet: function() {
+            console.log('Oinkers');
+    }    
+ };
+
+var christopher = { 
+    character: 'Christopher Robin',
+    greet: function() {
+            console.log('hello Tigger');
+    }
+};
+
+var bees = { 
+    character: 'Bees',
+    greet: function() {
+            console.log('Buzzzzzz!  Buzzzz!');
+    } 
+};
+
+var rabbit = { 
+    character: 'Rabbit',
+    greet: function() {
+            console.log('You needn\'t shout so loud. I heard you quite well the first time.');
+    } 
+};
+
+var gopher = { 
+    character: 'Gopher',
+    greet: function() {
+            console.log('Zzzzzz');
+        }
+};
+
+var kanga = { 
+    character: 'Kanga',
+    greet: function() {
+            console.log('Drink up your milk first, dear, and talk afterwards.')
+    }
+};
+
+var heffalumps = { 
+    character: 'Heffalumps',
+    greet: function() {
+            console.log('I could bear no longer...');
+        }
+};
+
+var eeyore = { 
+    character: 'Eeyore',
+    greet: function() {
+            console.log('...')
+    } 
+};
+
+var pooh = {
+    character: 'Winnie the Pooh',
+    greet: function() {
+           console.log('Oh brother');
+    }
+};
+
+var owl = {
+    character: 'Owl',
+    greet: function() {
+            console.log('HIPY PAPY BTHETHDTH THUTHDA BTHUTHDY');
+    }
+};
+
+var tigger = {
+    character: 'Tigger',
+    greet: function() {
+            console.log('The wonderful thing about Tiggers is Tiggers are wonderful things!');
+    }
+};
+
+    tigger.north = pooh;
+
+    pooh.south = tigger;
+    pooh.north = christopher;
+    pooh.west = piglet;
+    pooh.east = bees;
+
+    piglet.north = owl;
+    piglet.east = tigger.north;
+
+    bees.west = tigger.north;
+    bees.north = rabbit;
+
+    owl.south = pooh.west;
+    owl.east = pooh.north;
+
+    christopher.south = tigger.north;
+    christopher.west = piglet.north;
+    christopher.east = bees.north;
+    christopher.north = kanga;
+
+    rabbit.south = pooh.east;
+    rabbit.west = pooh.north;
+    rabbit.east = gopher;
+
+    gopher.west = bees.north;
+
+    kanga.south = pooh.north;
+    kanga.north = eeyore;
+    eeyore.south = christopher.north;
+    eeyore.east = heffalumps;
+    heffalumps.west = kanga.north;
+    
+
+var player = {
+    location: tigger
+}
+
+function move(direction) {
+    if (direction == 'north' && player.location.north != undefined) {
+        player.location = player.location.north;
+        console.log('You are now at ', player.location.character,'\'s house');
+        player.location.greet();
+    } else if (direction == 'south' && player.location.south != undefined) {
+        player.location = player.location.south;
+        console.log('You are now at ', player.location.character,'\'s house');
+        player.location.greet();
+    } else if (direction == 'west' && player.location.west != undefined) {
+        player.location = player.location.west;
+        console.log('You are now at ', player.location.character,'\'s house');
+        player.location.greet();
+    } else if (direction == 'east' && player.location.east != undefined) {
+        player.location = player.location.east;
+        console.log('You are now at ', player.location.character,'\'s house');
+        player.location.greet();
+    } else {
+        console.log('You may not go that way.')
+    }
+}
+</script>
+<html>
+    <body>
+        <img src='./map.png' width='600'>
+        <h3>Use console to interact with hundred acre woods..</h3>
+        <hr/>
+        <p>You're at Winnie the Pooh's house.</p>
+    </body>
+</html>
