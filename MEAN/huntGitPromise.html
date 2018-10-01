@@ -1,0 +1,45 @@
+<!--
+    MEAN - hunting Github Promise style
+    shawn chen
+    Sept 30, 2018
+    codingDojo
+-->
+<script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function(){
+    var url = 'https://api.github.com/users/zenbert5';
+    // setup promise
+    var getGit = url => {
+        return new Promise(function (resolve, reject) {
+            var request = new XMLHttpRequest();
+            request.open('GET', url);
+            request.onload = function() {
+                if (request.status === 200) {
+                    resolve(request.response);
+                } else {
+                    reject(Error('Error! =>'+request.statusText));
+                }
+            };
+        request.send();
+    })};
+    // listener for button click
+    $('#git').click(function(){
+        getGit(url).then(function(result){
+            // convert string from GET to dictionary
+            var output = JSON.parse(result);
+            $('#mah_git').html('<h3>'+output.name+'</h3>');
+        },
+        function(err) {
+            console.log(err);
+        });
+    });
+});
+</script>
+
+
+<button id='git'>Hit Me!</button>
+<div id='mah_git'></div>

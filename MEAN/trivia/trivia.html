@@ -1,0 +1,89 @@
+<!--
+    MEAN js fundamental - Trivia
+    shawn chen
+    sept 30, 2018
+    codingDojo
+-->
+
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta meta charset='UTF-8'>
+        <meta name='name' content='Trivia'>
+        <meta name='description' content='Trivia game using API'>
+        <meta name='author' content='Shawn Chen'>
+        <title>Trivia</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </head>
+    <style>
+        .header {
+            height: 60px;
+            background-color: lightsalmon;
+        }
+        .game {
+            min-height: 800px;
+            background-color: lightcyan;
+        }
+    </style>
+    <body>
+        <div class='header'>
+            <div class='row'>
+                <div id='notify' class='col col-lg-4 col-md-6 col-sm-12'></div>
+                <div id='title' class='col col-lg-4 col-md-6 col-sm-12'>
+                    <h3 class='text-center'>Ninja Trivia</h3>
+                </div>
+                <div class='col col-lg-4 col-md-6 col-sm-12'>
+                    <h5 id='points' class='text center'></h5>
+                </div>
+            </div>
+        </div>
+        <div id='game' class='container'></div>
+        <script>
+        $(document).ready(function(){
+            var urls = [
+                'https://opentdb.com/api.php?amount=5&category=10',
+                'https://opentdb.com/api.php?amount=5&category=9',
+                'https://opentdb.com/api.php?amount=5&category=8',
+            ];
+            var getUrl = url => {
+                return new Promise(function (resolve, reject) {
+                    var request = new XMLHttpRequest();
+                    request.open('GET', url);
+                    request.onload = function() {
+                        if (request.status === 200) {
+                            resolve(request.response);
+                        } else {
+                            reject(Error('Error! =>'+request.statusText));
+                        }
+                    };
+                request.send();
+            })};
+            for (var x=0; x<urls.length; ++x) {
+                getUrl(url).then(function(result){
+                    // convert string from GET to dictionary
+                    var dataSet[x] = JSON.parse(result);
+                });
+            };
+            // determine categories
+            // load game with api calls
+            // render the game
+            // detect keystrokes and respond with correct or incorrect answer 
+            // update points
+            // detect if all boxes are clicked
+
+        });
+        </script>
+    </body>
+</html>
+
+<!--
+var showNinja = '';
+    for (var x = 0; x < 5; ++x) {
+        showNinja += '<li class="NCBox"><img src="img/ninja' + x + '.png"></li>';
+        console.log(showNinja);
+    }
+document.getElementById('drawNinja').innerHTML = showNinja;
+-->
