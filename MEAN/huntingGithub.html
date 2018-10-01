@@ -1,0 +1,30 @@
+
+<!--
+----------------------------------------------------
+    MEAN - hunting GitHub
+    shawn chen
+    Sept 30, 2018
+    codingDojo
+    
+    v1.0 using callback
+----------------------------------------------------
+-->
+
+<script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function(){
+    $('#git').click(function(){
+        $.get('https://api.github.com/users/zenbert5', function(data){
+            $('#mah_git').html('<h3>'+data.name+'</h3>');
+        });
+    })
+});
+</script>
+
+
+<button id='git'>Hit Me!</button>
+<div id='mah_git'></div>
