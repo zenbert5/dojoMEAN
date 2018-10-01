@@ -1,0 +1,45 @@
+Welcome to Hundred Acre Woods
+
+pooh.html:175 Commands: pickUp(), drop() honey from Pooh.  
+mission();
+pooh.html:169 Your Mission Begins!
+
+
+pooh.html:171 Please deliver honey to  Christopher Robin
+undefined
+move('north');
+pooh.html:130 You are now at  Winnie the Pooh 's house
+pooh.html:63 Oh brother
+undefined
+move('west');
+pooh.html:138 You are now at  Piglet 's house
+pooh.html:7 Oinkers
+undefined
+pickUp();
+pooh.html:156 There is no honey here
+undefined
+move('east');
+pooh.html:142 You are now at  Winnie the Pooh 's house
+pooh.html:63 Oh brother
+undefined
+move('east');
+pooh.html:142 You are now at  Bees 's house
+pooh.html:21 Buzzzzzz!  Buzzzz!
+undefined
+pickUp();
+pooh.html:152 Player has picked up honey from Bees
+undefined
+move('north');
+pooh.html:130 You are now at  Rabbit 's house
+pooh.html:28 You needn't shout so loud. I heard you quite well the first time.
+undefined
+drop();
+pooh.html:164 This is not the right place. You need to pickup and deliver to  Christopher Robin
+undefined
+move('west');
+pooh.html:138 You are now at  Christopher Robin 's house
+pooh.html:14 hello Tigger
+undefined
+drop();
+pooh.html:162 Congratulations!  You have delivered honey to  Christopher Robin !
+undefined

@@ -1,4 +1,4 @@
-<!-- hundred acre woods -->
+<!-- hundred acre woods : Gamify version -->
 
 <script>
 var piglet = { 
@@ -6,7 +6,7 @@ var piglet = {
     greet: function() {
             console.log('Oinkers');
     }    
- };
+};
 
 var christopher = { 
     character: 'Christopher Robin',
@@ -60,7 +60,7 @@ var eeyore = {
 var pooh = {
     character: 'Winnie the Pooh',
     greet: function() {
-           console.log('Oh brother');
+            console.log('Oh brother');
     }
 };
 
@@ -77,6 +77,11 @@ var tigger = {
             console.log('The wonderful thing about Tiggers is Tiggers are wonderful things!');
     }
 };
+
+var woods = [
+    'Eeyore', 'Heffalumps', 'Kanga', 'Owl', 'Christopher Robin', 'Rabbit',
+    'Gopher', 'Piglet', 'Winnie the Pooh', 'Tigger'
+]
 
     tigger.north = pooh;
 
@@ -113,8 +118,11 @@ var tigger = {
     
 
 var player = {
-    location: tigger
+    location: tigger,
+    honey: false
 }
+
+var win_loc = '';
 
 function move(direction) {
     if (direction == 'north' && player.location.north != undefined) {
@@ -137,6 +145,36 @@ function move(direction) {
         console.log('You may not go that way.')
     }
 }
+
+function pickUp() {
+    if (player.location == bees && player.honey == false) {
+        player.honey = true;
+        console.log('Player has picked up honey from Bees');
+    } else if (player.location == bees && player.honey == true) {
+        console.log('You have already picked up honey.');
+    } else {
+        console.log('There is no honey here');
+    }
+}
+
+function drop() {
+    if (player.location.character == win_loc && player.honey == true) {
+        console.log('Congratulations!  You have delivered honey to ',win_loc,'!');
+    } else {
+        console.log('This is not the right place. You need to pickup and deliver to ',win_loc);
+    }
+}
+
+function mission() {
+    console.log('Your Mission Begins!\n\n');
+    win_loc = woods[Math.floor((Math.random() * 10) + 1)];
+    console.log('Please deliver honey to ',win_loc);
+}
+
+console.log('Welcome to Hundred Acre Woods\n');
+console.log('Commands: pickUp(), drop() honey from Pooh.  ');
+
+
 </script>
 <html>
     <body>
