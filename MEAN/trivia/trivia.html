@@ -43,11 +43,13 @@
         <div id='game' class='container'></div>
         <script>
         $(document).ready(function(){
-            var urls = [
-                'https://opentdb.com/api.php?amount=5&category=10',
-                'https://opentdb.com/api.php?amount=5&category=9',
-                'https://opentdb.com/api.php?amount=5&category=8',
+            var trivia = [
+                { category: 'Entertainment Books', url: 'https://opentdb.com/api.php?amount=5&category=10&type=multiple'},
+                { category: 'General Knowledge', url: 'https://opentdb.com/api.php?amount=5&category=9&type=multiple'},
+                { category: 'Entertainment Film', url: 'https://opentdb.com/api.php?amount=5&category=11&type=multiple'}
             ];
+            var dataSet = [];
+            var gameBoard;
             var getUrl = url => {
                 return new Promise(function (resolve, reject) {
                     var request = new XMLHttpRequest();
@@ -61,29 +63,55 @@
                     };
                 request.send();
             })};
-            for (var x=0; x<urls.length; ++x) {
-                getUrl(url).then(function(result){
-                    // convert string from GET to dictionary
-                    var dataSet[x] = JSON.parse(result);
-                });
-            };
-            // determine categories
-            // load game with api calls
-            // render the game
-            // detect keystrokes and respond with correct or incorrect answer 
-            // update points
-            // detect if all boxes are clicked
 
+            var promisesToMake = [
+                getUrl(trivia[0].url),
+                getUrl(trivia[1].url),
+                getUrl(trivia[2].url)
+            ];
+            var promises = Promise.all(promisesToMake);
+
+            promises.then(function(results) {
+                var dice;
+                var answers;
+                for (var n=0; n<3; ++n) {
+                    dataSet[n] = JSON.parse(results[n]).results;
+                }
+                gameBoard = '<div class="row text-center">';
+                gameBoard += '<div class="col bg-success"><h5>'+trivia[0].category+'</h5></div>';
+                gameBoard += '<div class="col bg-success"><h5>'+trivia[1].category+'</h5></div>';
+                gameBoard += '<div class="col bg-success"><h5>'+trivia[2].category+'</h5></div></row>';
+                console.log('here');
+                for (var i=0; i<5; ++i) {
+                    gameBoard += '<div class="row">';
+                    for (var j=0; j<3; ++j) {
+                        gameBoard += '<div id="q'+j+i+'" class="col text-center"><p>'+dataSet[j][i].question+'</p>';
+                        // randomize the correct answer with the incorrect answers
+                        answers = dataSet[j][i].incorrect_answers;
+                        dice = Math.floor((Math.random * 4) + 1);
+                        answers.splice(dice, 0, dataSet[j][i].correct_answer);
+                        for (var x=0; x<4; ++x) {
+                            gameBoard += '<button class="ans btn btn-info btn-sm m-1" value="'+answers[x]+'">'+answers[x]+'</button>';
+                        }
+                        gameBoard += '</div>';
+                    }
+                    gameBoard += '</div>';
+                }
+                $('#game').html(gameBoard);
+            });
+
+            $(document).on('click', '.ans', function(e) {
+                e.preventDefault();
+                var choice = $(this).text();
+                var id = $(this).closest('div').prop('id');
+                console.log(id);
+                if (choice == dataSet[id[1]][id[2]].correct_answer) {
+                    $('#notify').html('<h4 class="text-success text-center">Correct!<h4>');
+                } else {
+                    $('#notify').html('<h4 class="text-danger text-center">Sorry! Correct answer is '+dataSet[id[1]][id[2]].correct_answer+'<h4>');
+                }
+            });
         });
         </script>
     </body>
 </html>
-
-<!--
-var showNinja = '';
-    for (var x = 0; x < 5; ++x) {
-        showNinja += '<li class="NCBox"><img src="img/ninja' + x + '.png"></li>';
-        console.log(showNinja);
-    }
-document.getElementById('drawNinja').innerHTML = showNinja;
--->
