@@ -1,0 +1,11 @@
+
+[Running] node "/Users/shawnchen/Documents/codingdojo/dojoMEAN/node/mathModule/app.js"
+16
+64
+9801
+12
+92
+55
+
+[Done] exited with code=0 in 0.072 seconds
+
