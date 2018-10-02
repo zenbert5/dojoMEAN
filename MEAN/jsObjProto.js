@@ -1,3 +1,4 @@
+// this by default always reference the parent enclosure 
 console.log(this);
 
 function Person(name, age) {
@@ -32,6 +33,24 @@ var MyObjConstructor = function(name) {
     var obj1 = new MyObjConstructor('object1');
     var obj2 = new MyObjConstructor('object2');
     console.log(obj1);
+
+// the naming convention for Classes and Object Constructors is that they're capitalized and singular
+function Person(name, age) {
+    var privateVariable = "This variable is private";
+    var privateMethod = function() {
+        console.log(this);
+    }
+    this.name = name;
+    this.age = age;
+    this.greet = function() {
+        console.log("Hello my name is " + this.name + " and I am " + this.age + " years old!");
+    }
+}
+var eliza = new Person("Eliza", 48);
+console.log(eliza.privateVariable);
+// undefined!
+
+
 
 
 /****

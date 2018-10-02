@@ -1,0 +1,117 @@
+
+<!--  
+    MEAN - game of thrones
+    date: Oct 1st, 2018
+    author: Shawn Chen
+
+    description: this assignment was done using javascript and jquery. jquery was used to render the page along with detecting click of image to fetch fire&ice api object for match
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>GOT</title>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            // initialize house object
+            var houses = [
+                { name: 'baratheon', file: 'baratheon.png', num: 17 },
+                { name: 'lannister', file: 'lannister.jpg', num: 229 },
+                { name: 'stark', file: 'stark.jpg', num: 362 },
+                { name: 'targaryen', file: 'targaryen.jpg', num: 378 }
+            ];
+
+            var houseInit = '';
+            var output = '';
+            var houseUrl = 'https://www.anapioficeandfire.com/api/houses/';
+
+            houseInit += '<p class="h2 text-center"> GAME OF THRONES - HOUSE INFO</p>';
+            houseInit += '<p class="h4 text-center">(Content fetch via API after click)</p>';
+            for (var x = 0; x < houses.length; ++x) {
+                houseInit += '<div class="col col-lg-3 col-md-6 col-sm-12"><img id="' + houses[x].num + '" src="./gameofthrones/' + houses[x].file + '" alt="no pic"></div>';
+            }
+
+            $('#selector').html(houseInit);
+
+            // look for match on click
+            $('img').click(function () {
+                console.log($(this).attr('id'));
+                output = '';
+                $.get(houseUrl+$(this).attr('id'), function(data){
+                    output = '<p>Name: ' + data.name + '</p>';
+                    output += '<p>Words: ' + data.words + '</p><hr/><p> Titles: ';
+                    for (let x=0; x<data.titles.length-1; ++x) {
+                        output += data.titles[x] + ', ';
+                    }
+                    output += data.titles[data.titles.length-1] + '</p>';
+                    $('#infoMap').html(output);
+                });
+            })
+        })
+
+    </script>
+</head>
+
+<body>
+    <div class='container'>
+        <div id='selector' class='row'></div>
+        <div id='infoMap' class='p-3'></div>
+    </div>
+</body>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    h2, h3 {
+        color: white;
+    }
+
+    #selector {
+        display: block;
+        min-height: 300px;
+        margin: 0 auto;
+    }
+
+    #selector div {
+        display: inline-block;
+        vertical-align: top;
+        border: 2px solid gray;
+    }
+
+    #selector img {
+        width: 100%;
+        height: auto;
+    }
+
+    #infoMap {
+        margin: 0 20%;
+        padding: 15px;
+        min-height: 300px;
+        background-color: black;
+        text-align: center;
+    }
+</style>
+
+</html>
