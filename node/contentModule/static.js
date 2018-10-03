@@ -20,14 +20,14 @@ module.exports = function(req, res){
             res.writeHead(200, {'Content-Type': 'text/html'});
             res.write(contents);
             res.end();
-        })
+        });
     }
     else if (f_type === 'css'){
         fs.readFile('stylesheets/'+req.url, 'utf8', function(error, contents){
             res.writeHead(200, {'Content-type': 'text/css'});
             res.write(contents);
             res.end();
-        })
+        });
     } 
     else if (f_type === 'jpeg' || f_type === 'jpg'){
         console.log('fired '+req.url);
@@ -35,6 +35,8 @@ module.exports = function(req, res){
             res.writeHead(200, {'Content-type': 'image/jpg'});
             res.write(contents);
             res.end();
-        })
+        });
+    } else {
+        console.log('Unable to fetch object '+req.url);
     }
 }
