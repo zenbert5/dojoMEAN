@@ -7,8 +7,6 @@
  */
 
 var express = require("express");
-console.log("Let's find out what express is", express);
-// invoke express and store the result in the variable app
 var app = express();
 
 // This sets the location where express will look for the ejs views
@@ -17,8 +15,6 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 // this is the line that tells our server to use the "/static" folder for static contentcopy
 app.use('/static', express.static(__dirname + '/static'));
-
-console.log("Let's find out what app is", app);
 
 /* app.use(function(req, res){
     res.redirect('/cats');

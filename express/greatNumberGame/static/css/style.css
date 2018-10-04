@@ -1,0 +1,40 @@
+.container {
+    min-height: 450px;
+    margin: 20px auto;
+    padding-top: 200px;
+}
+.box {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+.innerBox {
+    margin: 30px auto;
+    text-align: center;
+}
+.inputX {
+    margin: 10px auto;
+}
+.redBox {
+    height: 200px;
+    width: 200px;
+    color: silver;
+    background-color: red;
+    border: 2px solid black;
+    margin: 0 auto;
+}
+.redBox h2 {
+    margin: 70px auto;
+}
+.greenBox {
+    height: 200px;
+    width: 200px;
+    color: white;
+    background-color: green;
+    border: 2px solid black;
+    margin: 0 auto;
+}
+.greenBox h3 {
+    margin: 40px auto 30px;
+}

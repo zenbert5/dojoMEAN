@@ -1,0 +1,9 @@
+
+In addition to installing node.js, there are modules/packages that are helpful/essential as part of the curriculum and development,
+i.e.:
+
+- express
+- body-parser (request parser)
+- ejs (embedded javascript)
+- socket.io (socket)
+- axios (promises)
