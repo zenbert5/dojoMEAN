@@ -14,6 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src='static/js/jquery.session.js'></script>
         <link rel='stylesheet' href='static/css/style.css' type='text/css' />
         <style>
             .container {
@@ -51,8 +52,8 @@
         <div class='container'>
             <div class='header'>
                 <h1 class='display-4'>STAR WARS</h1>
-                    <a id='people' href='#' class='btn btn-sm btn-info mx-1'>People</a>
-                    <a id='planets' href='#' class='btn btn-sm btn-warning mx-1'>Planets</a>
+                <a id='people' href='#' class='btn btn-sm btn-info mx-1'>People</a>
+                <a id='planets' href='#' class='btn btn-sm btn-warning mx-1'>Planets</a>
             </div>
             <div class='box'>
                 <div class='displayBox'></div>
@@ -60,31 +61,20 @@
         </div>
         <script>
             $(document).ready(function(){
-                $('#guess').on('click', function(e){
-                    e.preventDefault();
-                    var uData = $('#guessData').serialize();
-                    console.log(uData);
-                    // making this assignment difficult - use of session is not necessary at this point
+                $('#people').on('click', function(e){
+                    var page = $.session.get('people');
+                    if (page == undefined) {
+                        $.session.set('people', 1);
+                    }
                     $.ajax({
-                        url: 'http://localhost:8000/submit',
-                        type: 'POST',
-                        data: uData,
-                        dataType: 'json',
+                        url: 'http://localhost:8000/planet/'+page,
+                        type: 'GET',
                         success: function(serverResponse){
-                            if (serverResponse.status == 0) {
-                                $('#hint').html('<div class="redBox"><h2>Too low!</h2></div>');
-                            } else if (serverResponse.status == 2) {
-                                $('#hint').html('<div class="redBox"><h2>Too high!</h2></div>');
-                            } else {
-                                $('#hint').hide();
-                                let winOutput = '<div class="greenBox"><h3>'+serverResponse.num+' was the number!</h3>';
-                                winOutput += '<a href="/" class="text-center btn btn-secondary">Play again!</a></div>';
-                                $('#success').html(winOutput);
-                            }
-                        }
-                    })
+                            console.log(serverResponse);
+                    }})
                 })
             })
         </script>
     </body>
 </html>
+

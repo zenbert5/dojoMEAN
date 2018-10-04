@@ -9,7 +9,8 @@
 
 
 // load modules
-var express = require("express");
+var express = require('express');
+var requestP = require('request-promise'); 
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
@@ -36,24 +37,31 @@ app.get('/', function(req, res){
 });
 
 // parse post body and display data
-app.post('/submit', function(req, res){
-    var guessStatus = 0;
-    console.log(req.body.num);
-    // hurrah!!!  guessed it right
-    if (req.body.num == req.session.secret) {
-        guessStatus = 1;
-    // guessed low
-    } else if (req.body.num < req.session.secret) {
-        guessStatus = 0;
-    // guessed high
-    } else {
-        guessStatus = 2;
-    }
-    const response = {
-        status: guessStatus,
-        num: req.session.secret,
-    }
-    res.end(JSON.stringify(response));
+app.get('/planet/:id', function(req, res){
+    let page = req.params.id;
+    var url = 'https://swapi.co/api/planets/?page='+page;
+    
+    var getGit = url => {
+    return new Promise(function (resolve, reject) {
+        var request = new request();
+        request.open('GET', url);
+        request.onload = function() {
+            if (request.status === 200) {
+                resolve(request.response);
+            } else {
+                reject(Error('Error! =>'+request.statusText));
+            }
+        };
+        request.send();
+    })};
+    getGit(url).then(function(result){
+        // convert string from GET to dictionary
+        var output = JSON.parse(result);
+        res.end(output);
+        },
+        function(err) {
+            console.log(err);
+    });
 });
 
 // start server on port 8000
