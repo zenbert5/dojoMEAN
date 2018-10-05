@@ -1,0 +1,47 @@
+.container {
+    min-height: 800px;
+    margin: 0 auto;
+    background-image: url('../images/starWars.jpg');
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    z-index: -1;
+}
+.header {
+    min-height: 100px;
+    background-color: rgb(20, 116, 84);
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+}
+.box {
+    padding: 30px;
+    margin: 0 auto;
+}
+.displayBox {
+    height: 500px;
+    width: 400px;
+    border: 2px solid lightslategray;
+    background-color: rgb(34, 4, 4);
+    opacity: 0.8;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    overflow: auto;
+}
+#hourglass {
+    margin: 0 auto;
+}
+#hourglass img {
+    border-radius: 50%;
+    border: 1px solid lightslategray;
+}
+.navi {
+    margin: 0 auto;
+    text-align: center;
+}
+.navi a {
+    padding: 0 5px;
+}

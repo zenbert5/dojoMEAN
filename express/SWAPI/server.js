@@ -1,7 +1,7 @@
 /*************************************************
  * 
  *  MEAN express - Star Wars API (post)
- *  Oct 3, 2018
+ *  Oct 4, 2018
  *  shawn chen
  *  codingDojo
  * 
@@ -10,8 +10,9 @@
 
 // load modules
 var express = require('express');
-var requestP = require('request-promise'); 
+const request = require('request'); 
 var session = require('express-session');
+var path = require('path');
 var bodyParser = require('body-parser');
 
 var app = express();
@@ -27,9 +28,9 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // set environment
-app.set('views', __dirname + '/views'); 
+app.use(express.static(path.join(__dirname + '/static')));
+app.set('views', path.join(__dirname + '/views')); 
 app.set('view engine', 'ejs');
-app.use('/static', express.static(__dirname + '/static'));
 
 // counter display using session
 app.get('/', function(req, res){
@@ -37,31 +38,23 @@ app.get('/', function(req, res){
 });
 
 // parse post body and display data
-app.get('/planet/:id', function(req, res){
-    let page = req.params.id;
-    var url = 'https://swapi.co/api/planets/?page='+page;
-    
+app.post('/fetchAPI', function(req, res){
+    var url = req.body.url;
     var getGit = url => {
-    return new Promise(function (resolve, reject) {
-        var request = new request();
-        request.open('GET', url);
-        request.onload = function() {
-            if (request.status === 200) {
-                resolve(request.response);
-            } else {
-                reject(Error('Error! =>'+request.statusText));
-            }
-        };
-        request.send();
-    })};
-    getGit(url).then(function(result){
+        return new Promise(function (resolve, reject) {
+            request.get(url, function(err, resp, body){
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(JSON.parse(body));
+                }
+            });
+        })
+    };
+    getGit(url).then(body => {
         // convert string from GET to dictionary
-        var output = JSON.parse(result);
-        res.end(output);
-        },
-        function(err) {
-            console.log(err);
-    });
+        res.send(body);
+    }).catch(err => {console.log('caught', err.message)});
 });
 
 // start server on port 8000

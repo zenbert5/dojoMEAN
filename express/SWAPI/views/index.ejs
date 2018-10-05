@@ -14,64 +14,161 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <script src='static/js/jquery.session.js'></script>
-        <link rel='stylesheet' href='static/css/style.css' type='text/css' />
-        <style>
-            .container {
-                min-height: 800px;
-                margin: 0 auto;
-                background-image: url('static/images/starWars.jpg');
-                background-attachment: fixed;
-                background-position: center; 
-                background-repeat: no-repeat;
-                opacity: 0.9;
-                z-index: -1;
-            }
-            .header {
-                min-height: 100px;
-                background-color: aquamarine;
-                margin: 0 auto;
-                padding: 10px;
-                text-align: center;
-            }
-            .box {
-                padding: 30px;
-                margin: 0 auto;
-            }
-            .displayBox {
-                height: 500px;
-                width: 400px;
-                border: 2px solid lightslategray;
-                border-radius: 10px;
-                margin: 0 auto;
-                padding: 10px;
-            }
-        </style>
+        <script src='js/jquery.session.js'></script>
+        <link rel='stylesheet' href='css/style.css' type='text/css' />
     </head>
     <body>
         <div class='container'>
             <div class='header'>
-                <h1 class='display-4'>STAR WARS</h1>
+                <h1 class='display-4 text-light'>STAR WARS</h1>
                 <a id='people' href='#' class='btn btn-sm btn-info mx-1'>People</a>
                 <a id='planets' href='#' class='btn btn-sm btn-warning mx-1'>Planets</a>
+                <a id='starships' href='#' class='btn btn-sm btn-primary mx-1'>Starships</a>
+                <a id='vehicles' href='#' class='btn btn-sm btn-success mx-1'>Vehicles</a>
+                <a id='species' href='#' class='btn btn-sm btn-dark mx-1'>Species</a>
             </div>
             <div class='box'>
-                <div class='displayBox'></div>
+                <div id='showTime' class='displayBox'></div>
+                <div class='navi'>
+                    <a href='#' id='navBack' hidden>Previous 10</a>
+                    <a href='#' id='showAll' class='text-danger' hidden>Get all</a>
+                    <a href='#' id='navForward' hidden>Next 10</a>
+                </div>
+                <div id='hourglass' class='box' hidden><img src='images/colorLoad.gif' width='70'></div>
             </div>
         </div>
         <script>
             $(document).ready(function(){
+                // fetch data ajax callback/promise
+                var server = 'http://localhost:8000/fetchAPI';
+                var fetch = fetchUrl => {
+                    return new Promise(function (resolve, reject){
+                        var html = '';
+                        $.ajax({
+                            url: server,
+                            type: 'POST',
+                            data: { url: fetchUrl },
+                            success: function(serverResponse){
+                                // set session to reference page markers (urls)
+                                $.session.set('previous', serverResponse.previous);
+                                $.session.set('next', serverResponse.next);
+                                // manipulate dom to show previous and next links
+                                if (serverResponse.previous !== null ) {
+                                    $('#navBack').removeAttr('hidden');
+                                } else {
+                                    $('#navBack').attr('hidden')
+                                }
+                                $('#showAll').removeAttr('hidden');
+                                if (serverResponse.next !== null){
+                                    $('#navForward').removeAttr('hidden');
+                                } else {
+                                    $('#navForward').attr('hidden')
+                                }
+                                var data = serverResponse.results;
+                                // remember # of objects
+                                $.session.set('count', data.count);
+                                for (let n = 0; n < data.length; ++n){
+                                    html += '<p class="text-light">' + data[n].name + '</p>';
+                                }
+                                resolve(html);
+                            },
+                            error: function(err){
+                                reject(error);
+                            }
+                        })
+                    })
+                }
+                var showAllData = page => {
+                    return new Promise(function (resolve, reject){
+                        var html = '';
+                        console.log('page')
+                        $.ajax({
+                            url: server,
+                            type: 'POST',
+                            data: { url: page },
+                            success: function(serverResponse){
+                                next_page = serverResponse.next;
+                                var data = serverResponse.results;
+                                for (let n = 0; n < data.length; ++n){
+                                    html += '<p class="text-light">' + data[n].name + '</p>';
+                                }
+                                $('#showTime').append(html);
+                                console.log(next_page);
+                                if (next_page == null ){
+                                    $('#hourglass').hide();
+                                    resolve(html);
+                                } else {
+                                    resolve(showAllData(next_page));
+                                }
+                            },
+                            error: function(err){
+                                reject(error);
+                            }
+                        })
+                    })
+                }
+                // display to output
+                function show(data){
+                    $('#showTime').html(data);
+                }
+                // DOM signal catcher
                 $('#people').on('click', function(e){
-                    var page = $.session.get('people');
-                    if (page == undefined) {
-                        $.session.set('people', 1);
+                    const url = 'https://swapi.co/api/people/?page=1';
+                    $.session.set('type', 'people');
+                    fetch(url).then(function(data) {
+                        show(data);
+                    })
+                })
+                $('#planets').on('click', function(e){
+                    const url = 'https://swapi.co/api/planets/?page=1';
+                    $.session.set('type', 'planets');
+                    fetch(url).then(function(data) {
+                        show(data);
+                    })
+                })
+                $('#starships').on('click', function(e){
+                    const url = 'https://swapi.co/api/starships/?page=1';
+                    $.session.set('type', 'starships');
+                    fetch(url).then(function(data) {
+                        show(data);
+                    })
+                })
+                $('#vehicles').on('click', function(e){
+                    const url = 'https://swapi.co/api/vehicles/?page=1';
+                    $.session.set('type', 'vehicles');
+                    fetch(url).then(function(data) {
+                        show(data);
+                    })
+                })
+                $('#species').on('click', function(e){
+                    const url = 'https://swapi.co/api/species/?page=1';
+                    $.session.set('type', 'species');
+                    fetch(url).then(function(data) {
+                        show(data);
+                    })
+                })
+                $('#navBack').on('click', function(e){
+                    const page = $.session.get('previous');
+                    if (page !== null) {
+                        fetch(page).then(function(data) {
+                            show(data);
+                        })
                     }
-                    $.ajax({
-                        url: 'http://localhost:8000/planet/'+page,
-                        type: 'GET',
-                        success: function(serverResponse){
-                            console.log(serverResponse);
-                    }})
+                })
+                $('#navForward').on('click', function(e){
+                    const page = $.session.get('next');
+                    if (page !== null) {
+                        fetch(page).then(function(data) {
+                            show(data);
+                        })
+                    }
+                })
+                $('#showAll').on('click', function(e){
+                    const type = $.session.get('type');
+                    var completeD = '';
+                    var page = 'https://swapi.co/api/' + type + '/?pages=1';
+                    $('#hourglass').removeAttr('hidden');
+                    showAllData(page);
                 })
             })
         </script>
