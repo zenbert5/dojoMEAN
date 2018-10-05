@@ -1,7 +1,7 @@
 /***************************************************
  * 
- *  MEAN express - survey form assignment (socket io)
- *  Oct 4, 2018
+ *  MEAN express - epic button (socket io)
+ *  Oct 5, 2018
  *  shawn chen
  *  codingDojo
  * 
@@ -17,9 +17,6 @@ const querystring = require('querystring');
 const app = express();
 const server = app.listen(8000);
 const io = require('socket.io')(server);
-
-
-// WARNING: app.listen
 
 // prepare session functionality
 app.use(session({
@@ -40,41 +37,26 @@ io.on('connection', function (socket) {
     var connections = 0;
     socket.on('connect', function(){
         connections++;
-        io.sockets.emit('connections', connections);
+        io.sockets.emit('connections', { count: connections });
     });
     socket.on('disconnect', function(){
         connections--;
-        io.sockets.emit('connections', connections);
+        io.sockets.emit('connections', { count: connections });
     });
+    socket.on('addOne', function(){
+        connections++;
+        io.sockets.emit('connections', { count: connections });
+    });
+    socket.on('reset', function(){
+        connections = 0;
+        io.sockets.emit('connections', { count: connections });
+    })
     socket.emit('greeting', { msg: 'Greetings, from server Node, brought to you by Sockets! -Server' }); //3
     console.log('server up');
-    socket.on('submit form', function (data) {
-        let newData = querystring.parse(data);
-        let num = Math.floor(Math.random() * 1000) + 1;
-        let sendData = {
-            name: newData.name,
-            dojo: newData.dojo,
-            lango: newData.lango,
-            comment: newData.comment,a
-            number: num
-        };
-        socket.emit('lucky number', sendData);
-    });
 });
 
 
 // counter display using session
 app.get('/', function (req, res) {
     res.render('index');
-});
-
-// parse post body and display data
-app.post('/submit', function (req, res) {
-    const output = {
-        name: req.body.name,
-        dojo: req.body.dojo,
-        lango: req.body.lango,
-        comment: req.body.comment,
-    }
-    res.render('result', output);
 });
