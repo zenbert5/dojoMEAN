@@ -1,5 +1,5 @@
 <!--
-    star wars api codingDojo san jose - Oct 3, 2018
+    star wars api codingDojo san jose - Oct 4, 2018
 -->
 <!DOCTYPE html>
 <html lang='en'>
@@ -28,13 +28,15 @@
                 <a id='species' href='#' class='btn btn-sm btn-dark mx-1'>Species</a>
             </div>
             <div class='box'>
-                <div id='showTime' class='displayBox'></div>
+                <div class='displayBox'>
+                    <div id='showTime'></div>
+                    <div class='progress' ><img id='hourglass' src='images/colorLoad.gif' width='50' hidden></div>
+                </div>
                 <div class='navi'>
                     <a href='#' id='navBack' hidden>Previous 10</a>
                     <a href='#' id='showAll' class='text-danger' hidden>Get all</a>
                     <a href='#' id='navForward' hidden>Next 10</a>
                 </div>
-                <div id='hourglass' class='box' hidden><img src='images/colorLoad.gif' width='70'></div>
             </div>
         </div>
         <script>
@@ -95,7 +97,7 @@
                                 $('#showTime').append(html);
                                 console.log(next_page);
                                 if (next_page == null ){
-                                    $('#hourglass').hide();
+                                    $('#hourglass').attr('hidden', 'hidden');
                                     resolve(html);
                                 } else {
                                     resolve(showAllData(next_page));

@@ -9,11 +9,11 @@
 
 
 // load modules
-var express = require('express');
+const express = require('express');
 const request = require('request'); 
-var session = require('express-session');
-var path = require('path');
-var bodyParser = require('body-parser');
+const session = require('express-session');
+const path = require('path');
+const bodyParser = require('body-parser');
 
 var app = express();
 
