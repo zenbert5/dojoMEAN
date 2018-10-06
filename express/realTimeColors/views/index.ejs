@@ -1,0 +1,76 @@
+<!--
+    socket io real-time colors
+-->
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta meta charset='UTF-8'>
+    <meta name='name' content='codingDojo real-time colors'>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src='js/jquery.session.js'></script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js'></script>
+    <style>
+        .container {
+            min-height: 800px;
+            margin: 0 auto;
+            padding-top: 300px;
+        }
+        #box {
+            text-align: center;
+            margin: 0 auto;
+        }
+        </style>
+</head>
+
+<body>
+    <div class='container'>
+        <div id='box'>
+            <div class='btn-group-lg'>
+                <button id='green' class='btn btn-outline-dark'>Green</button>
+                <button id='blue' class='btn btn-outline-dark'>Blue</button>
+                <button id='pink' class='btn btn-outline-dark'>Pink</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            var socket = io();
+            // single server new guy on the block
+            socket.emit('connection', function() {
+                console.log('signal server');
+            });
+            // initialize color to the current global color (from server)
+            socket.on('initialize', function(data){
+                console.log('received initialization');
+                $('.container').css('background-color', data.color);
+            });
+            socket.on('greeting', function (data){
+                console.log(data.msg);
+                socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' });
+            });
+            socket.on('color update', function(data){
+                console.log('received color update -->'+data.color);
+                $('.container').css('background-color', data.color);
+            });
+            $('#green').on('click', function(){
+                socket.emit('color change', { color: 'green'});
+            });
+            $('#blue').on('click', function(){
+                socket.emit('color change', { color: 'blue'});
+            });
+            $('#pink').on('click', function(){
+                socket.emit('color change', { color: 'rgba(234, 128, 128, 1)'});
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -46,7 +46,7 @@ io.on('connection', function (socket) {
         connections--;
         io.sockets.emit('connections', connections);
     });
-    socket.emit('greeting', { msg: 'Greetings, from server Node, brought to you by Sockets! -Server' }); //3
+    socket.emit('greeting', { msg: 'Greetings, from server Node, brought to you by Sockets! -Server' });
     console.log('server up');
     socket.on('submit form', function (data) {
         let newData = querystring.parse(data);
@@ -55,7 +55,7 @@ io.on('connection', function (socket) {
             name: newData.name,
             dojo: newData.dojo,
             lango: newData.lango,
-            comment: newData.comment,a
+            comment: newData.comment,
             number: num
         };
         socket.emit('lucky number', sendData);
