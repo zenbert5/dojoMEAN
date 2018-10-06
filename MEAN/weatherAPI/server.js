@@ -41,6 +41,7 @@ app.get('/', function(req, res){
 // parse post body and display data
 app.post('/weather', function(req, res){
     let city = querystring.parse(req.body.city).city;
+    console.log('city is '+city);
     let url = 'http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=9b6b2aef755a9eb115ab278f9ece31a0';
     console.log(url);
     var getGit = url => {

@@ -16,26 +16,7 @@
         crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <style>
-        .container {
-            margin: 0 auto;
-            min-height: 200px;
-        }
-        .inputBox {
-            margin: 0 auto;
-            width: 50%;
-        }
-        #weather {
-            margin: 20px auto;
-            color: darkgreen;
-            min-height: 200px;
-            border: 1px solid silver;
-            border-radius: 10px;
-            padding: 20px;
-            width: 50%;
-            vertical-align: center;
-        }
-    </style>
+    <link rel='stylesheet' href='css/style.css' type='text/css' />
 </head>
 
 <body>
@@ -52,16 +33,32 @@
     <script>
         $(document).ready(function () {
             var server = 'http://localhost:8000/weather';
+            var checkUsage = localStorage.getItem('city');
+            if (checkUsage !== null) {
+                $.ajax({
+                    url: server,
+                    type: 'POST',
+                    data: { city: 'city='+checkUsage },
+                    success: function (serverResponse) {
+                        let fahrenheit = Math.round((serverResponse.main.temp - 273.15) * 9/5 + 32);
+                        let temp = '<h3 class="text-success">Welcome Back!</h3>'; 
+                        temp += '<h3> Temperature of '+serverResponse.name+' is '+fahrenheit+'&#176;F </h3>';
+                        $('#weather').html(temp);
+                    }
+                });
+            };
+            
             $('#loc').submit(function (e) {
-                //var local_store = localStorage.setItem('city', $(this).serializeArray()[0].city);
+                var local_store = localStorage.setItem('city', $(this).serializeArray()[0].value);
+                console.log(local_store);
+                console.log($(this).serialize());
                 e.preventDefault();
                 $.ajax({
                     url: server,
                     type: 'POST',
                     data: { city: $(this).serialize() },
                     success: function (serverResponse) {
-                        console.log(serverResponse);
-                        if (serverResponse.cod !== '200') {
+                        if (serverResponse.cod !== 200) {
                             let temp = '<h4 class="text-danger"> Unable to fetch weather of the city entered.  Please double check spelling. </h4>';
                             $('#weather').html(temp);
                         } else {
