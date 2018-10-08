@@ -1,0 +1,11 @@
+.container {
+    min-height: 300px;
+    margin-top: 30px;
+}
+.box {
+    width: 60%;
+    margin: 0 auto;
+    padding: 15px;
+    border: 1px solid rgba(34, 131, 201, 0.91);
+    border-radius: 10px;
+}

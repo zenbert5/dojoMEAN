@@ -1,3 +1,17 @@
+// track individual socket status
+var allClients = [];
+io.sockets.on('connection', function(socket) {
+   allClients.push(socket);
+
+   socket.on('disconnect', function() {
+      console.log('Got disconnect!');
+
+      var i = allClients.indexOf(socket);
+      allClients.splice(i, 1);
+   });
+});
+
+
 const express = require('express');
 const app = express();
      

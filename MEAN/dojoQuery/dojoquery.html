@@ -1,0 +1,28 @@
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+
+<button id='hot'>HOT</button>
+<button id='hot2'>HOT2</button>
+
+
+<script>
+    // Link our variable "button" to a DOM elementcopy
+
+
+function $Dojo(element_id) {
+    this.node = document.getElementById(element_id);
+    this.click = action => {
+        this.node.addEventListener('click', action);
+    }
+    this.hover = (onHover, offHover) => {
+        this.node.addEventListener('mouseover', onHover);
+        this.node.addEventListener('mouseout', offHover);
+    }
+    return this.node;
+}
+
+($Dojo('hot').click(function(){console.log('hello')}));
+($Dojo('hot2').hover(function(){console.log('this button was hover on')}));
+
+
+</script>

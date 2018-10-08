@@ -15,8 +15,9 @@ function dojo(element_id) {
     }
 };
 
-var $Dojo = function(element_id) {
+(var $Dojo = function(element_id) {
     return new dojo(element_id);
-};
+};)(arg1)
+
 $Dojo('#hot').click(function() { console.log("The button was clicked!") });
 </script>
