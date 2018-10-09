@@ -14,7 +14,7 @@ body {
     border-radius: 10px;
     padding: 10px;
 }
-.flashRegister, .flashLogin {
+.flash {
     min-height: 30px;
 }
 

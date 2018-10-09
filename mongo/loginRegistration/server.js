@@ -40,12 +40,37 @@ app.listen(8000, function () {
 
 // database config
 mongoose.connect('mongodb://localhost/loginRegister', { useNewUrlParser: true });
+
 const userSchema = new mongoose.Schema({
-    email: { type: String, required: [true, 'Name cannot be empty'] },
-    first_name: { type: String, required: [true, 'Comment must be entered'], minlength: [2, 'Two or more characters required'] },
-    last_name: { type: String, required: [true, 'Comment must be entered'], minlength: [2, 'Two or more characters required'] },
-    password: { type: String, required: [true, 'Comment must be entered'], minlength: [2, 'Two or more characters required'] },
-    birthday: { type: Date, required: [true, 'Birthday must be provided'] },
+    email: { 
+        type: String, 
+        validate: {
+            validator: function (v) {
+                return /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$/.test(v);
+            },
+            message: props => `${props.value} is not a valid email!`
+        },
+        required: [true, 'Name cannot be empty'] 
+    },
+    first_name: { 
+        type: String, 
+        required: [true, 'Comment must be entered'], 
+        minlength: [2, 'Two or more characters required'] 
+    },
+    last_name: { 
+        type: String, 
+        required: [true, 'Comment must be entered'], 
+        minlength: [2, 'Two or more characters required'] 
+    },
+    password: { 
+        type: String, 
+        required: [true, 'Comment must be entered'], 
+        minlength: [8, 'Password must be at least 8 characters'] 
+    },
+    birthday: { 
+        type: Date, 
+        required: [true, 'Birthday must be provided'] 
+    },
 }, { timestamps: true })
 
 const User = mongoose.model('User', userSchema);
@@ -53,18 +78,25 @@ const User = mongoose.model('User', userSchema);
 
 // render roster(index) of objects
 app.get('/', (req, res) => {
-    res.render('index');
+    const data = {
+        error: req.flash('error'),
+        success: req.flash('success')
+    }
+    res.render('index', data);
 });
 
 app.post('/register', (req, res) => {
+    console.log(req.body);
     User.find({ email: req.body.email }, (err, result) => {
         if (err) {
             console.log('Error encountered with registration ' + err);
+            for (var key in err.errors){
+                req.flash('error', err.errors[key].message);
+            }
         } else {
-            if (result) {
-                console.log('--->' + result);
+            if (result.length) {
                 console.log('Email already exist!  Cannot register again');
-                // output notification to user
+                req.flash('error', 'Email entered has already been registered.  Please contact administrator or try a new email.');
             } else {
                 const hash = bcrypt.hashSync(req.body.password, salt);
                 let newUser = new User(req.body);
@@ -72,10 +104,14 @@ app.post('/register', (req, res) => {
                 newUser.save((err) => {
                     if (err) {
                         console.log('Error in registering user');
-                        // send message to user
+                        for (var key in err.errors){
+                            req.flash('error', err.errors[key].message);
+                        }
+                        res.redirect('/');
                     } else {
                         console.log('User successfully registered');
                         // set message for user
+                        req.flash('success', 'Registration successful!');
                     }
                 })
             }

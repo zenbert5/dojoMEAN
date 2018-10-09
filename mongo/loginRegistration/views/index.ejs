@@ -22,12 +22,18 @@
     <body>
         <div class='container'>
             <h1 class='text-secondary'>Login &#38; Registration</h1>
+            <div class='flash'>
+            <% if (error) { %>
+                <p class='text-danger'><%= error %></p>
+            <% } %> 
+            <% if (success) { %>
+                <p class='text-success'><%= success %></p>
+            <% } %> 
+            </div>
             <div class='row'>
                 <div class='col-lg-6 col-md-6 col-sm-12 mx-0'>
                     <div id='register'>
                         <h4>Register Here</h4>
-                        <div class='flashRegister'>
-                        </div>
                         <form action='/register' method='post'>
                             <div class='form-group'>
                                 <label for='first_name'>First Name:</label>
@@ -62,8 +68,6 @@
                 <div class='col-lg-6 col-md-6 col-sm-12 mx-0'>
                     <div id='login'>
                         <h4>Login Here</h4>
-                        <div class='flashLogin'>
-                        </div>
                         <form action='/login' method='post'>
                             <div class='form-group'>
                                 <label for='email'>Email:</label>
