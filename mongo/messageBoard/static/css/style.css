@@ -1,0 +1,22 @@
+.dp_msg {
+    padding: 20px 0;
+}
+
+.comments {
+    padding: 15px 0px 5px 20px;
+    margin: 35px 0;
+}
+
+.message_style {
+    color: rgb(127, 15, 255);
+    font-style: bold;
+}
+
+.comment_style {
+    color: rgb(15, 119, 255);
+}
+
+.errors {
+    min-height: 40px;
+    color: red;
+}

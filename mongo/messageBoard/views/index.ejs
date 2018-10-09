@@ -1,0 +1,76 @@
+<!--
+    messageboard - mongo codingDojo san jose - Oct 8, 2018
+-->
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta meta charset='UTF-8'>
+        <meta name='name' content='codingDojo mongo assignment - the wall'>
+        <meta name='author' content='shawn chen 2018-10-08 san jose dojo'>
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <link rel='stylesheet' href='/css/style.css' type='text/css' />
+    </head>    
+    <body>
+        <div class='container'>
+            <div class='text-center py-2'><h2 class='text-primary'>Here Lies the Wall</h2></div>
+            <div class='errors'>
+                <% if (expressFlash) { %>
+                    <%= expressFlash %>
+                <% } %>
+            </div>
+            <div class='messages'>
+                <form action='/insertMessage' method='post'>
+                    <div class='form-group col-3'>
+                        <label for='name'>Name</label>
+                        <input type='text' class='form-control' name='name'></input>
+                    </div>
+                    <div class='form-group mx-3'>
+                        <label for='message'>Post a message</label>
+                        <textarea rows='3' class='form-control' name='message'></textarea>
+                    </div>
+                    <div class='form-group p-1'>
+                        <input type='submit' class='btn btn-primary float-right'></input>
+                    </div>
+                </form>
+                <div class='dp_msg'>
+                <!-- for message in messages -->
+                <% for (let x of wallmessages) { %>
+                    <p class='message_style'><%= x.name %> &#8711;   
+                        <span class='text-muted'><%= x.createdAt %></span>
+                        <a href='/delete/<%= x._id %>' class='text-danger'>&#9842;</a>
+                    </p>
+                    <p class='text-dark'><%= x.message %></p>
+                    <!-- for comment in comments (in a message) -->
+                    <div class='comments'>
+                    <% if (x.comments.length > 0) { %>
+                        <% for (let y of x.comments) { %>
+                        <p class='comment_style'><%= y.name %> &#8711;   <span class='text-muted small'><%= y.createdAt %></span></p>
+                        <p class='text-secondary'><%= y.comment %></p>
+                        <% } %>
+                    <% } %>
+                        <form action='/insertComment/<%= x._id %>' method='post'>
+                            <div class='form-group col-3'>
+                                <label for='name'>Name</label>
+                                <input type='text' class='form-control' name='name'></input>
+                            </div>
+                            <div class='form-group mx-3'>
+                                <label for='comment'>Post a comment</label>
+                                <textarea rows='2' class='form-control' name='comment'></textarea>
+                            </div>
+                            <div class='form-group p-1 float-right'>
+                                <input type='submit' class='btn btn-success'></input>
+                            </div>
+                        </form>
+                    </div>
+                <% } %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
