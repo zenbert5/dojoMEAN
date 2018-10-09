@@ -17,13 +17,3 @@ body {
 .flash {
     min-height: 30px;
 }
-
-.register_error {
-    color: red;
-    font-style: italic;
-}
-
-.login_error {
-    color: purple;
-    font-style: italic;
-}
