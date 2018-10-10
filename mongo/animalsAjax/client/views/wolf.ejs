@@ -1,0 +1,52 @@
+<!--
+    wolves - mongo codingDojo san jose - Oct 8, 2018
+-->
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta meta charset='UTF-8'>
+        <meta name='name' content='codingDojo mongo assignment - wolves(mongoose)'>
+        <meta name='author' content='shawn chen 2018-10-08 san jose dojo'>
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src='/js/jquery.session.js'></script>
+        <link rel='stylesheet' href='/css/style.css' type='text/css' />
+    </head>
+    <body>
+        <div class='container'>
+            <div class='header text-right py-2'>
+                <a href='/' class='btn btn-outline-secondary'>Back to Roster</a>
+            </div>
+            <div class='box'>
+                <h3 class='text-primary text-Success'>Wolf: <%= wolf.name %></h3>
+                <table class='table'>
+                    <tr scope='row'>
+                        <th scope='col'>Age:</th>
+                        <td scope='col'><%= wolf.age %></td>
+                    </tr>
+                    <tr scope='row'>
+                        <th scope='col'>Gender:</th>
+                        <td scope='col'><%= wolf.gender %></td>
+                    </tr>
+                    <tr scope='row'>
+                        <th scope='col'>Size:</th>
+                        <td scope='col'><%= wolf.size %></td>
+                    </tr>
+                    <tr scope='row'>
+                        <th scope='col'>Color:</th>
+                        <td scope='col'><%= wolf.color %></td>
+                    </tr>
+                    <tr scope='row'>
+                        <th scope='col'>Registered On:</th>
+                        <td scope='col'><%= wolf.created_on %></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

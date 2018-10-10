@@ -1,3 +1,18 @@
+/*
+*   MEAN algo - BST
+*   shawn chen
+*   oct 10, 2018
+*   codingDojo
+*
+*/
+
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.right = null;
+        this.left = null;
+    }
+}
 
 class BST {
     constructor() {
@@ -11,22 +26,25 @@ class BST {
             let runner = this.root;
             while (runner != null) {
                 if (runner.val > val) {
-                    runner = runner.left;
+                    if (runner.left == null) {
+                        runner.left = new Node(val);
+                        return this;
+                    } else {
+                        runner = runner.left;
+                    }
                 } else {
-                    runner = runner.right
+                    if (runner.right == null) {
+                        runner.right = new Node(val);
+                        return this;
+                    } else {
+                        runner = runner.right;
+                    }
                 }
             }
-            runner = new Node(val);
-            return this;
         }
     }
 }
 
-class Node {
-    constructor(val) {
-        this.val = val;
-        this.right = null;
-        this.left = null;
-    }
-}
+var stree = new BST();
+stree.insert(30).insert(10);
 
