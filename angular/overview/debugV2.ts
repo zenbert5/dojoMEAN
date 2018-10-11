@@ -78,13 +78,10 @@ class Ninja {
 /** ninja class expects two paramters to initialize an instance **/
 const shane = new Ninja('shane', 'lee');
 // Since I'm having trouble making an instance of Ninja, I decided to do this:
-const turing = {
-    fullName: "Alan Turing",
-    firstName: "Alan",
-    lastName: "Turing"
-}
+const turing = new Ninja('Alan', 'Turing');
+
 // Now I'll make a study function, which is a lot like our graduate function from above:
-function study(programmer) {
+function study(programmer: Ninja) {
     return `Ready to whiteboard an algorithm, ${programmer.fullName}?`
 }
 // Now this has problems:

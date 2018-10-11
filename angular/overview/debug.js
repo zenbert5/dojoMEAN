@@ -4,18 +4,13 @@
 *   shawn chen
 *   codingDojo
 */
-
-
 // #1
 var myString;
 // I can assign myString like this:
 myString = "Bee stinger";
 // Why is there a problem with this? What can I do to fix this?
-
-// change the type of the value to string type
+/** change the datatype to string as expected by the type **/
 myString = '9';
-
-
 // #2
 function sayHello(name) {
     return "Hello, " + name + "!";
@@ -23,11 +18,8 @@ function sayHello(name) {
 // This is working great:
 console.log(sayHello("Kermit"));
 // Why isn't this working? I want it to return "Hello, 9!"
-
 // change the type of the value to string type
 console.log(sayHello('9'));
-
-
 // #3
 function fullName(firstName, lastName, middleName) {
     var fullName = firstName + " " + middleName + " " + lastName;
@@ -55,8 +47,6 @@ var jay = {
 console.log(graduate(christine));
 // This one has problems:
 console.log(graduate(jay));
-
-
 // #5
 var Ninja = /** @class */ (function () {
     function Ninja(firstName, lastName) {
@@ -70,24 +60,16 @@ var Ninja = /** @class */ (function () {
     return Ninja;
 }());
 // This is not making an instance of Ninja, for some reason:
-
-// class Ninja expects two parameters to initialize an instance**
+/** ninja class expects two paramters to initialize an instance **/
 var shane = new Ninja('shane', 'lee');
 // Since I'm having trouble making an instance of Ninja, I decided to do this:
-var turing = {
-    fullName: "Alan Turing",
-    firstName: "Alan",
-    lastName: "Turing"
-};
+var turing = new Ninja('Alan', 'Turing');
 // Now I'll make a study function, which is a lot like our graduate function from above:
 function study(programmer) {
     return "Ready to whiteboard an algorithm, " + programmer.fullName + "?";
 }
-// Now this has problems: 
+// Now this has problems:
 console.log(study(turing));
-
-
-
 // #6
 var increment = function (x) { return x + 1; };
 // This works great:
@@ -98,6 +80,7 @@ console.log(square(4));
 // This is not working:
 var multiply = function (x, y) { return x * y; };
 // Nor is this working:
+/** fixed syntax including adding {} */
 var math = function (x, y) {
     var sum = x + y;
     var product = x * y;
@@ -106,6 +89,7 @@ var math = function (x, y) {
 };
 // #7
 var Elephant = /** @class */ (function () {
+    // updated the constructor to initialize the age
     function Elephant(age) {
         var _this = this;
         this.age = age;

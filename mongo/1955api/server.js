@@ -32,6 +32,9 @@ app.get('/', (req, res) => {
 
 app.get('/new/:name', (req, res) => {
     People.create({name: req.params.name }, (err, doc) => {
+        if (err) {
+            res.json(err);
+        }
         console.log(doc);
         res.json(doc);
     })

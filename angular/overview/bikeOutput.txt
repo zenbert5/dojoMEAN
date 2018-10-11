@@ -1,0 +1,25 @@
+
+Bike info - Price:$200  Maximum speed:30mph  Total miles:0
+
+Riding..
+Riding..
+Riding..
+
+Bike info - Price:$200  Maximum speed:30mph  Total miles:30
+
+
+Bike info - Price:$300  Maximum speed:25mph  Total miles:0
+
+Riding..
+Riding..
+<--Reversing
+<--Reversing
+
+Bike info - Price:$300  Maximum speed:25mph  Total miles:10
+
+
+Bike info - Price:$500  Maximum speed:35mph  Total miles:0
+
+
+Bike info - Price:$500  Maximum speed:35mph  Total miles:0
+

@@ -1,0 +1,21 @@
+.container {
+    min-height: 800px;
+    margin: 0 auto;
+}
+#loginBox {
+    width: 40%;
+    padding: 20px;
+    margin: 300px auto 0;
+    border: 1px solid silver;
+    border-radius: 10px;
+}
+#board {
+    width: 70%;
+}
+#messages {
+    margin: 0 auto;
+    height: 600px;
+    border: 1px solid darkgray;
+    overflow: auto;
+    padding: 10px;
+}
