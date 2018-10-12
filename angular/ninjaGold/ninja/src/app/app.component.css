@@ -1,0 +1,20 @@
+.container {
+    margin: 0 auto;
+}
+
+.adventure {
+    margin: 0 auto;
+}
+
+.box {
+    margin: 10px;
+    text-align: center;
+    vertical-align: center;
+    border: 1px solid black;
+    min-height: 200px;
+    padding: 25px 10px;
+}
+
+.log {
+    border: 1px solid gray;
+}

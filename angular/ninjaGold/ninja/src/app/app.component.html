@@ -1,0 +1,63 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<title>Ninja Gold - Angular Style (ZZ)</title>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+<div style="text-align:center">
+    <h3>
+        Welcome to Ninja Gold!  Angular Style
+    </h3>
+    <img width="200" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+<div class='container'>
+    <div class='controls text-center'>
+        <button class='btn btn-primary mx-2' (click)='startNewGame()'>New Game</button>
+        <button class='btn btn-danger mx-2' (click)='continue()'>Continue</button>
+        <button class='btn btn-success mx-2' (click)='save()'>Save</button>
+<!-- Task Name: <input class='mx-2' type='text' (keyup)='onKeyUp($event)'> -->
+<!--     <button (click)="onButtonClickParam()">Click me!</button> -->
+    </div>
+    <div class='adventure'>
+        <h2 class='px-3 py-4 text-center'>Total gold: {{ gold }}</h2>
+        <div class='row'>
+            <div class='col col-lg-3 col-md-6 col-sm-12'>
+                <div class='box'>
+                    <h3>Farm</h3>
+                    <h5>Earns 2-5 Gold</h5>
+                    <button class='btn btn-outline-success btn-block' (click)='onClickFarm()'>Farm!</button>
+                </div>
+            </div>
+            <div class='col col-lg-3 col-md-6 col-sm-12'>
+                <div class='box'>
+                    <h3>Cave</h3>
+                    <h5>Earns 5-10 Gold</h5>
+                    <button class='btn btn-outline-success btn-block' (click)='onClickCave()'>Cave!</button>
+                </div>
+            </div>
+            <div class='col col-lg-3 col-md-6 col-sm-12'>
+                <div class='box'>
+                    <h3>House</h3>
+                    <h5>Earns 7-15 Gold</h5>
+                    <button class='btn btn-outline-success btn-block' (click)='onClickHouse()'>House!</button>
+                </div>
+            </div>
+            <div class='col col-lg-3 col-md-6 col-sm-12'>
+                <div class='box'>
+                    <h3>Casino</h3>
+                    <h5>Earn or lose up to 100 Gold</h5>
+                    <button class='btn btn-outline-danger btn-block' (click)='onClickCasino()'>Casino!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='log'>
+        
+    </div>
+</div>
