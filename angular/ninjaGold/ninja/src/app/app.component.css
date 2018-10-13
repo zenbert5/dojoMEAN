@@ -10,11 +10,28 @@
     margin: 10px;
     text-align: center;
     vertical-align: center;
-    border: 1px solid black;
+    border: 2px solid silver;
     min-height: 200px;
     padding: 25px 10px;
+    color: white;
+    background-color: darkgreen;
+}
+
+.box2 {
+    margin: 10px;
+    text-align: center;
+    vertical-align: center;
+    border: 2px solid red;
+    min-height: 200px;
+    padding: 25px 10px;
+    background-color: gold;
 }
 
 .log {
     border: 1px solid gray;
+    padding: 10px;
+    height: 400px;
+    margin: 10px;
+    overflow: auto;
+    background-color: silver;
 }

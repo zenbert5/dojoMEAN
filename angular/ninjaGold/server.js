@@ -19,79 +19,52 @@ app.listen(8000, function () {
 
 mongoose.connect('mongodb://localhost/ninjaGold', { useNewUrlParser: true });
 const ninjaSchema = new mongoose.Schema({
-    name: { type: String, required: [true, 'Name cannot be empty'] },
-    activity: [{ type: String }],
-    score: { type: Number },
-    leaders: [{ name: { type: String } }, { score: { type: Number } }]
+    //name: { type: String, required: [true, 'Name cannot be empty'] },
+    activity: { type: String },
+    gold: { type: Number }
+    //leaders: [{ name: { type: String } }, { score: { type: Number } }]
 }, { timestamps: true })
 
 const Ninja = mongoose.model('ninjas', ninjaSchema);
 
 
-/* app.get('/', (req, res) => {
-    res.render('index.html');
-}) */
-
-function randNumRange(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-
-app.get('/farm', (req, res) => {
-    let gold = randNumRange(2, 5);
-    
-})
-
-
-/*
-app.get('/:id', (req, res) => {
-    Task.findOne({ _id: req.params.id }, (err, doc) => {
-        console.log(doc);
-        res.json(doc);
-    })
-})
-
-app.get('/approx/:title', (req, res) => {
-    Task.findOne({ title: new RegExp('^' + req.params.title + '$', "i") }, (err, doc) => {
-        console.log(doc);
-        res.json(doc);
-    })
-});
-
-app.post('/create', (req, res) => {
-    Task.create(req.body, (err, doc) => {
+app.post('/updateActivity', (req, res) => {
+    Ninja.create({activity: req.body.activity}, (err, data) => {
+    // for bonus - store gold
         if (err) {
-            console.log('Error in creating the document - ' + err);
-            res.redirect('/all');
+            console.log(`error occurred ${err}`);
+            res.json({status: false, data: err}); 
         } else {
-            res.json(doc);
+            console.log('activity saved!');
+            res.json({status: true, data: data});
         }
     })
 })
 
-app.put('/:id', (req, res) => {
-    // prepare put
-    let data = {};
-    // iterate
-    for (let key in req.body) {
-        console.log('> ' + key + ' ' + req.body[key]);
-        data[key] = req.body[key];
-    }
-    Task.updateOne({ _id: ObjectId(req.params.id) }, { $set: data }, (err, doc) => {
+app.post('/saveProgress', (req, res) => {
+    console.log('attempt to save data!')
+    console.log(req.body.gold);
+    Ninja.updateOne({gold: req.body.gold}, (err, data) => {
+    // for bonus - store gold
         if (err) {
-            console.log('Error in updating the document -> ' + req.params.id);
-            res.json(err);
+            console.log(`error occurred ${err}`);
+            /* res.json(err); */ 
         } else {
-            res.json(doc);
+            console.log('activity saved!');
+            res.json(data);
         }
     })
 })
 
-app.delete('/:id', (req, res) => {
-    Task.deleteOne({ _id: req.params.id }, (err) => {
+app.get('/getProgress', (req, res) => {
+    Ninja.find({}, (err, data) => {
+    // for bonus - store gold
         if (err) {
-            console.log('Error in deleting the document -> ' + req.params.id);
-            res.json(err);
+            console.log(`error occurred ${err}`);
+            /* res.json(err); */ 
+        } else {
+            console.log('activity saved!');
+            res.json(data);
         }
     })
-}) */
+})

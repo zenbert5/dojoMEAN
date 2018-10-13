@@ -21,43 +21,42 @@
         <button class='btn btn-primary mx-2' (click)='startNewGame()'>New Game</button>
         <button class='btn btn-danger mx-2' (click)='continue()'>Continue</button>
         <button class='btn btn-success mx-2' (click)='save()'>Save</button>
-<!-- Task Name: <input class='mx-2' type='text' (keyup)='onKeyUp($event)'> -->
-<!--     <button (click)="onButtonClickParam()">Click me!</button> -->
     </div>
     <div class='adventure'>
-        <h2 class='px-3 py-4 text-center'>Total gold: {{ gold }}</h2>
+        <h2 class='px-3 py-4 display-4 text-center'>GOLD: {{ gold }}</h2>
         <div class='row'>
             <div class='col col-lg-3 col-md-6 col-sm-12'>
                 <div class='box'>
                     <h3>Farm</h3>
                     <h5>Earns 2-5 Gold</h5>
-                    <button class='btn btn-outline-success btn-block' (click)='onClickFarm()'>Farm!</button>
+                    <button class='btn btn-light btn-block my-2' (click)='onClickPlace(1)'>Farm!</button>
                 </div>
             </div>
             <div class='col col-lg-3 col-md-6 col-sm-12'>
                 <div class='box'>
                     <h3>Cave</h3>
                     <h5>Earns 5-10 Gold</h5>
-                    <button class='btn btn-outline-success btn-block' (click)='onClickCave()'>Cave!</button>
+                    <button class='btn btn-light btn-block my-2' (click)='onClickPlace(2)'>Cave!</button>
                 </div>
             </div>
             <div class='col col-lg-3 col-md-6 col-sm-12'>
                 <div class='box'>
                     <h3>House</h3>
                     <h5>Earns 7-15 Gold</h5>
-                    <button class='btn btn-outline-success btn-block' (click)='onClickHouse()'>House!</button>
+                    <button class='btn btn-light btn-block my-2' (click)='onClickPlace(3)'>House!</button>
                 </div>
             </div>
             <div class='col col-lg-3 col-md-6 col-sm-12'>
-                <div class='box'>
+                <div class='box2'>
                     <h3>Casino</h3>
                     <h5>Earn or lose up to 100 Gold</h5>
-                    <button class='btn btn-outline-danger btn-block' (click)='onClickCasino()'>Casino!</button>
+                    <button class='btn btn-danger btn-block my-1' (click)='onClickPlace(4)'>Casino!</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class='log'>
-        
+    <div class='log' *ngIf='log'>
+        <h4>Ninjitsu in Action!</h4>
+        <p *ngFor='let item of log'>{{ item }}</p>
     </div>
 </div>

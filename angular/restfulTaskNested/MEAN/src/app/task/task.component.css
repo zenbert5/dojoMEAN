@@ -1,0 +1,10 @@
+.container {
+    margin: 0 auto;
+}
+
+.taskView2 {
+    margin: 10px auto;
+    width: 90%;
+    padding: 10px;
+    border: 2px solid gold;
+}

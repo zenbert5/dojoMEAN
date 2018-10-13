@@ -9,13 +9,13 @@ export class HttpService {
     constructor(private _http: HttpClient) { 
     }
 
-    gotoFarm(){
-        return this._http.get('/farm');
+    updateActivity(data: any) {
+        return this._http.post('/updateActivity', data);
     }
-   /*  getTask(id: string) {
-        return this._http.get(`${id}`);
+    save(data: any) {
+        return this._http.post('/saveProgress', data);
     }
-    getApprox(fetch: string) {
-        return this._http.get(`/approx/${fetch}`);
-    } */
+    getProgress() {
+        return this._http.get('/getProgress');
+    }
 }

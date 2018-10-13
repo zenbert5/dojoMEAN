@@ -1,0 +1,103 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+<div style="text-align:center">
+    <h2>
+        Welcome to {{ title }}!
+    </h2>
+    <img width="100" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+</div>
+<div class='container'>
+    <div class='controls text-center'>
+        <button class='btn btn-primary' (click)='onButtonClick()'>Show Tasks</button>
+        Task Name: <input class='mx-2' type='text' (keyup)='onKeyUp($event)'>
+<!--     <button (click)="onButtonClickParam()">Click me!</button> -->
+    </div>
+    <div class='formInput'>
+        <form (submit) = 'onSubmit()' >
+            <div class='form-group text-center'>
+                <p> {{ newTask | json }} </p>
+            </div>
+            <div class='form-group text-center'>
+                <input type="text" class='col-3 mx-1' name="newTask.title" [(ngModel)] = "newTask.title" />
+                <input type="text" class='col-3 mx-1'name="newTask.description" [(ngModel)] = "newTask.description" />
+                <input type="submit" class='col-3 btn-primary mx-1' value="Create Task" />
+            </div>
+        </form >
+    </div>
+    <div class='flash' *ngIf='flashMsg'>
+        <p class='text-danger'> {{ flashMsg }} </p>
+    </div>
+    <div class='tasksList' *ngIf='tasks'>
+        <table class='table table-hover'>
+            <thead>
+                <tr scope='row'>
+                    <th scope='col'>Title</th>
+                    <th scope='col'>Description</th>
+                    <th scope='col'>Completed</th>
+                    <th scope='col'>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let task of tasks' class='text-info'>
+                    <td><a href='#' (click)='onButtonClickItem(task._id)'>{{ task.title }}</a></td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.completed }}</td>
+                    <td>
+                        <button class='btn btn-sm btn-outline-warning mx-1' (click)='onButtonClickEdit(task._id)'>Edit</button>
+                        <button class='btn btn-sm btn-outline-danger mx-1' (click)='onButtonClickDelete(task._id)'>Delete</button>
+                        <button class='btn btn-sm btn-outline-success mx-1' (click)='onButtonClickToo(task._id)'>Focus</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class='taskView' *ngIf='oneTask'>
+        <table class='table table-hover'>
+            <tr scope='row'>
+                <th scope='col'>Title</th>
+                <td scope='col'>{{ oneTask.title }}</td>
+            </tr>
+            <tr scope='row'>
+                <th scope='col'>Description</th>
+                <td scope='col'>{{ oneTask.description }}</td>
+            </tr>
+            <tr scope='row'>
+                <th scope='col'>Completed</th>
+                <td scope='col'>{{ oneTask.completed }}</td>
+            </tr>
+        </table>
+    </div>
+    <app-task *ngIf='twoTask' [taskItem]='twoTask'></app-task>
+    <div class='editInput' *ngIf='editTask'>
+        <form (submit) = 'onUpdate()' >
+            <div class='form-group'>
+                <label for='editTask.title'>Title:</label>
+                <input type="text" class='form-control' name="editTask.title" [(ngModel)] = "editTask.title" />
+            </div>
+            <div class='form-group'>
+                <label for='editTask.description'>Description:</label>
+                <input type="text" class='form-control' name="editTask.description" [(ngModel)] = "editTask.description" />
+            </div>
+            <div class='form-group'>
+                <label for='editTask.completed'>Completed:</label>
+                <input type='hidden' name='editTask._id' [value]='editTask._id' />
+                <select class='form-control' name="editTask.completed" [(ngModel)] = "editTask.completed">
+                    <option selected='selected'>false</option>
+                    <option>true</option>
+                </select>
+            </div>
+            <div class='form-group'>
+                <input type="submit" class='col-3 btn-outline-info mx-1' value="Update" />
+            </div>
+        </form >
+    </div>
+</div>
