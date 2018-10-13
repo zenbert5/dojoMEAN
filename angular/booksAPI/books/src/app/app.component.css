@@ -4,8 +4,23 @@
 
 .tasksList {
     margin: 0 auto;
-    width: 90%;
     border: 1px solid blue;
     border-radius: 10px;
     padding: 10px;
+}
+
+.controls {
+    margin: 5px auto;
+    padding: 5px;
+    width: 50%;
+}
+
+.formInput {
+    margin: 10px auto;
+    width: 50%;
+}
+
+.bookEntry {
+    margin: 10px auto;
+    width: 50%;
 }

@@ -3,6 +3,7 @@
  * oct 12, 2018
  * shawn chen
  * codingDojo SJ
+ * 
  */
 
 const express = require('express');
@@ -11,7 +12,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static( __dirname + '/books/dist/books' ));
+app.use(express.static(__dirname + '/books/dist/books'));
 
 app.listen(8000, function () {
     console.log("Books API running.. listening on port 8000");
@@ -22,8 +23,10 @@ const authorSchema = new mongoose.Schema({
     first_name: { type: String, required: [true, 'First name cannot be empty'], minlength: [2, 'Name must be 2 characters or longer'] },
     last_name: { type: String, required: [true, 'Last name cannot be empty'], minlength: [2, 'Name must be 2 characters or longer'] },
     birthday: { type: Date, required: [true, 'Birthday must be provided'] },
-    country: { type: Date, required: [true, 'Country cannot be empty'], minlength: [3, 'Country of origin must be at least 3 characters']},
-    books: { type: Array, dafault: [] }
+    country: { type: String, required: [true, 'Country cannot be empty'], minlength: [3, 'Country of origin must be at least 3 characters'] },
+    books: [
+        { title: { type: String }, year: { type: String } }
+    ]
 }, { timestamps: true })
 
 const Author = mongoose.model('authors', authorSchema);
@@ -35,14 +38,14 @@ const Author = mongoose.model('authors', authorSchema);
 app.get('/authors', (req, res) => {
     Author.find({}, (err, docs) => {
         res.json(docs)
-    }).sort({createdAt: -1});
+    }).sort({ createdAt: -1 });
 })
 
 // show books by author (id)
 app.get('/author/:id/books', (req, res) => {
-    Author.findOne({_id: req.params.id}, (err, data) => {
+    Author.findOne({ _id: req.params.id }, (err, data) => {
         if (err) {
-            console.log ('Error occurred with fetching all books by author');
+            console.log('Error occurred with fetching all books by author');
             let errResponse = {
                 status: false,
                 error: err
@@ -61,7 +64,7 @@ app.post('/author/create', (req, res) => {
     // data validation before creation
     Author.create(req.body, (err, data) => {
         if (err) {
-            console.log ('Error occurred with creating an author');
+            console.log('Error occurred with creating an author');
             let errResponse = {
                 status: false,
                 error: err
@@ -78,9 +81,9 @@ app.post('/author/create', (req, res) => {
 // create(add) a book by author
 app.post('/author/:id/addBook', (req, res) => {
     // data validation before insertion
-    Author.updateOne({_id: req.params.id}, {$push: {title: req.body.title, pubYear: req.body.year}}, (err, data) => {
+    Author.updateOne({ _id: req.params.id }, { $push: { books: { title: req.body.title, year: req.body.year } } }, (err, data) => {
         if (err) {
-            console.log ('Error occurred with adding a book');
+            console.log('Error occurred with adding a book');
             let errResponse = {
                 status: false,
                 error: err
@@ -97,9 +100,9 @@ app.post('/author/:id/addBook', (req, res) => {
 // update a book by author
 app.put('/author/:id/updateAuthor', (req, res) => {
     // data validation required - validate req.body dict can be passed to $set as coded below
-    Author.updateOne({_id: req.params.id}, {$set: req.body}, (err, data) => {
+    Author.updateOne({ _id: req.params.id }, { $set: req.body }, (err, data) => {
         if (err) {
-            console.log (`Error updating author id ${req.params.id}`);
+            console.log(`Error updating author id ${req.params.id}`);
             let errResponse = {
                 status: false,
                 error: err
@@ -114,10 +117,10 @@ app.put('/author/:id/updateAuthor', (req, res) => {
 
 
 // delete a book
-app.delete('/author/:id/deleteBook', (req, res) => {
-    Author.updateOne({_id: req.params.id}, {$pull: {title: {req.body.title}}}, (err, data) => {
+app.delete('/deleteBook/:id/author/:aid', (req, res) => {
+    Author.findByIdAndUpdate(req.params.aid, { $pull: { books: {_id: req.params.id}}}, (err, data) => {
         if (err) {
-            console.log (`Error deleting book ${req.params.id}`);
+            console.log(`Error deleting book ${req.params.id}`);
             let errResponse = {
                 status: false,
                 error: err
@@ -133,9 +136,9 @@ app.delete('/author/:id/deleteBook', (req, res) => {
 
 // delete an author
 app.delete('/author/:id/delete', (req, res) => {
-    Author.deleteOne({_id: req.params.id}, (err, data) => {
+    Author.deleteOne({ _id: req.params.id }, (err, data) => {
         if (err) {
-            console.log (`Error deleting author ${req.params.id}`);
+            console.log(`Error deleting author ${req.params.id}`);
             let errResponse = {
                 status: false,
                 error: err

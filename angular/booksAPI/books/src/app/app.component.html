@@ -17,27 +17,77 @@
 </div>
 <div class='container'>
     <div class='controls text-center'>
-        <!-- buttons here -->
+        <button class='btn btn-sm btn-primary mx-1' (click)='onButtonClickGetAuthors()'>Show Authors</button>
+        <button class='btn btn-sm btn-success mx-1' (click)='onButtonClickAddAuthor()'>Add Authors</button>
     </div>
-    <div class='flash' *ngIf='flashMsg'>
-        <p class='text-danger'> {{ flashMsg }} </p>
+    <div class='formInput' *ngIf='addAuthor'>
+        <div class='flash' *ngIf='flashMsg'>
+            <p class='text-danger'> {{ flashMsg }} </p>
+        </div>
+        <form (submit) = 'onAddAuthor()' >
+            <div class='form-group text-center'>
+                <p> {{ addAuthor | json }} </p>
+                <button class='btn btn-secondary' (click)='closeInput()'>Close Form</button>
+            </div>
+            <div class='form-group'>
+                <label for='addAuthor.first_name'>First Name</label>
+                <input type="text" class='form-control' name="addAuthor.first_name" [(ngModel)] = "addAuthor.first_name" />
+                <label for='addAuthor.last_name'>Last Name</label>
+                <input type="text" class='form-control' name="addAuthor.last_name" [(ngModel)] = "addAuthor.last_name" />
+                <label for='addAuthor.country'>Country</label>
+                <input type="text" class='form-control' name="addAuthor.country" [(ngModel)] = "addAuthor.country" />
+                <label for='addAuthor.birthday'>Birthday</label>
+                <input type="date" class='form-control' name="addAuthor.birthday" [(ngModel)] = "addAuthor.birthday" />
+            </div>
+            <div class='form-group'>
+                <input type="submit" class='btn btn-primary form-control' value="Add Author" />
+            </div>
+        </form >
     </div>
-    <div class='tasksList' *ngIf=''>
+    <div class='bookEntry' *ngIf='newBook'>
+        <form (submit) = 'onAddBook()' >
+            <div class='form-group text-center'>
+                <p> {{ addBook | json }} </p>
+                <h4>Add A book</h4>
+                <button class='btn btn-secondary' (click)='closeInput2()'>Close Form</button>
+            </div>
+            <div class='form-group'>
+                <label for='newBook.title'>Title</label>
+                <input type="text" class='form-control' name="newBook.title" [(ngModel)] = "newBook.title" />
+                <label for='newBook.year'>Year</label>
+                <input type="date" class='form-control' name="newBook.year" [(ngModel)] = "newBook.year" />
+            </div>
+            <div class='form-group'>
+                <input type="submit" class='btn btn-primary form-control' value="Add Book" />
+            </div>
+        </form >
+    </div>
+    <div class='tasksList' *ngIf='authors'>
         <table class='table table-hover'>
             <thead>
                 <tr scope='row'>
-                    <th scope='col'> </th>
-                    <th scope='col'> </th>
-                    <th scope='col'> </th>
-                    <th scope='col'> </th>
+                    <th scope='col'>Name</th>
+                    <th scope='col'>Country</th>
+                    <th scope='col'>Birthday</th>
+                    <th scope='col'>Books</th>
+                    <th scope='col'>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor=''>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
-                    <td> </td>
+            <tbody class='small'>
+                <tr *ngFor='let author of authors'>
+                    <td>{{ author.first_name }} {{ author.last_name }}</td>
+                    <td>{{ author.country }}</td>
+                    <td>{{ author.birthday }}</td>
+                    <td>
+                        <span class='row' *ngFor='let book of author.books'>
+                        <p>{{ book.title }} - {{ book.year }}</p>
+                        <button class='btn btn-sm btn-danger m-1' (click)='delBook(author._id, book._id)'>&#9842;</button>
+                        </span>
+                    </td>
+                    <td>
+                        <button class='btn btn-sm btn-primary m-1' (click)='addBook(author._id)'>+ Book</button>
+                        <button class='btn btn-sm btn-danger m-1' (click)='delAuthor(author._id)'>- Author</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
