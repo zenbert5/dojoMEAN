@@ -21,6 +21,6 @@ export class HttpService {
         return this._http.post('/author/create', data);
     }
     addBookToAuthor(data: any) {
-        return this._http.post(`/author/${data.author}/addBook`, data);
+        return this._http.post(`/author/${data._id}/addBook`, data);
     }
 }

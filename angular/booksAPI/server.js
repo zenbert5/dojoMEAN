@@ -1,9 +1,11 @@
 /*
  * MEAN angular - BooksAPI CRUD
- * oct 12, 2018
+ * oct 13, 2018
  * shawn chen
  * codingDojo SJ
  * 
+ *  v1.0 - oct 12, 2018
+ *  v1.1 - upgraded code on validation and error handling
  */
 
 const express = require('express');
@@ -25,7 +27,8 @@ const authorSchema = new mongoose.Schema({
     birthday: { type: Date, required: [true, 'Birthday must be provided'] },
     country: { type: String, required: [true, 'Country cannot be empty'], minlength: [3, 'Country of origin must be at least 3 characters'] },
     books: [
-        { title: { type: String }, year: { type: String } }
+        { title: { type: String, required: [true, 'Title of book cannot be empty']},
+            year: { type: String, required: [true, 'Year cannot be empty'] } }
     ]
 }, { timestamps: true })
 
@@ -62,19 +65,32 @@ app.get('/author/:id/books', (req, res) => {
 // create author
 app.post('/author/create', (req, res) => {
     // data validation before creation
-    Author.create(req.body, (err, data) => {
-        if (err) {
-            console.log('Error occurred with creating an author');
-            let errResponse = {
-                status: false,
-                error: err
-            }
-            res.json(errResponse);
-        } else {
-            console.log('Author creation successful');
-            res.json(data);
+    var today = new Date;
+    var todayFormatted = JSON.stringify(today).slice(1,11);
+    var userDate = JSON.stringify(req.body.birthday).slice(1,11);
+    console.log(`New Author's birthday inputted by user -> ${userDate}`);
+    console.log(`Today's Date -> ${todayFormatted}`);
+    if (userDate > todayFormatted) {
+        let errResponse = {
+            status: false,
+            error: 'Birthday must be in the past'
         }
-    })
+        res.json(errResponse);
+    } else {
+        Author.create(req.body, (err, data) => {
+            if (err) {
+                console.log('Error occurred with creating an author');
+                let errResponse = {
+                    status: false,
+                    error: err
+                }
+                res.json(errResponse);
+            } else {
+                console.log('Author creation successful');
+                res.json(data);
+            }
+        })
+    }
 })
 
 

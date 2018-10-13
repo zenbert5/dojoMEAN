@@ -21,9 +21,6 @@
         <button class='btn btn-sm btn-success mx-1' (click)='onButtonClickAddAuthor()'>Add Authors</button>
     </div>
     <div class='formInput' *ngIf='addAuthor'>
-        <div class='flash' *ngIf='flashMsg'>
-            <p class='text-danger'> {{ flashMsg }} </p>
-        </div>
         <form (submit) = 'onAddAuthor()' >
             <div class='form-group text-center'>
                 <p> {{ addAuthor | json }} </p>
@@ -62,6 +59,9 @@
             </div>
         </form >
     </div>
+    <div class='flash'>
+        <p class='text-danger' *ngIf='flashMsg'> {{ flashMsg }} </p>
+    </div>
     <div class='tasksList' *ngIf='authors'>
         <table class='table table-hover'>
             <thead>
@@ -77,11 +77,11 @@
                 <tr *ngFor='let author of authors'>
                     <td>{{ author.first_name }} {{ author.last_name }}</td>
                     <td>{{ author.country }}</td>
-                    <td>{{ author.birthday }}</td>
+                    <td>{{ author.birthday | date : mediumDate }}</td>
                     <td>
                         <span class='row' *ngFor='let book of author.books'>
                         <p>{{ book.title }} - {{ book.year }}</p>
-                        <button class='btn btn-sm btn-danger m-1' (click)='delBook(author._id, book._id)'>&#9842;</button>
+                        <p style='color: red;' (click)='delBook(author._id, book._id)'>&#9842;</p>
                         </span>
                     </td>
                     <td>
