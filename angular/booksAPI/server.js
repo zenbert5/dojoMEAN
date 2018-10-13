@@ -29,9 +29,7 @@ const authorSchema = new mongoose.Schema({
 const Author = mongoose.model('authors', authorSchema);
 
 // welcome page
-app.get('/', (req, res) => {
-    res.render('index.html');
-})
+// handle by angular
 
 // show all authors
 app.get('/authors', (req, res) => {
