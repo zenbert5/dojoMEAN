@@ -1,0 +1,11 @@
+.box {
+    margin: 15px auto;
+    width: 80%;
+    border: 1px solid slategray;
+    padding: 10px;
+    background-image: url('../../assets/images/bur.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    -webkit-text-stroke: 1px white;
+}

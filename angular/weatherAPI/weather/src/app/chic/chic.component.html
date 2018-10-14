@@ -1,0 +1,25 @@
+<div class='box' *ngIf='weather'>
+    <h2 class='text-center text-info'>{{ weather.name }}</h2>
+    <table class='table table-borderless'>
+        <tr>
+            <th>Temperature</th>
+            <td><h4>{{ weather.main.temp }} F</h4></td>
+        </tr>
+        <tr>
+            <th>Humidity</th>
+            <td>{{ weather.main.humidity }}</td>
+        </tr>
+        <tr>
+            <th>Minimum Temperature</th>
+            <td>{{ weather.main.temp_min }} F</td>
+        </tr>
+        <tr>
+            <th>Maximum Temperature</th>
+            <td>{{ weather.main.temp_max }} F</td>
+        </tr>
+        <tr>
+            <th>Wind</th>
+            <td>Speed: {{ weather.wind.speed }}  Degree: {{ weather.wind.deg }}</td>
+        </tr>
+    </table>
+</div>
