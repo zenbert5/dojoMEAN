@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 20px auto;
+}
+.navi {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#shinto {
+    width: 60px;
+    transform: rotate(-35deg);
+    margin-right: 20px;
+}

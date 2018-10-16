@@ -1,0 +1,45 @@
+<div class='container'>
+    <div class='displayLedger' *ngIf='showLedger'>
+        <h4 class='text-center'>Current Ledger Info</h4>
+        <table class='table table-bordered'>
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Amount</th>
+                    <th>Value</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let ledger of showLedger; let i = index;'>
+                    <td>{{ ledger.action }}</td>
+                    <td>{{ ledger.amount }}</td>
+                    <td>{{ ledger.value }}</td>
+                    <td class='text-center'>
+                        <button class='btn btn-sm btn-outline-info' (click)='ledgerDetail(i)'>Details</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class='showDetails' *ngIf='detail'>
+        <table class='table table-condensed'>
+            <tr>
+                <td>Transaction id:</td>
+                <td>{{ detail.transaction_id }}</td>
+            </tr>
+            <tr>
+                <td>Action:</td>
+                <td>{{ detail.action }}</td>
+            </tr>
+            <tr>
+                <td>Value:</td>
+                <td>{{ detail.value }}</td>
+            </tr>
+            <tr>
+                <td>Amount:</td>
+                <td>{{ detail.amount }}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class='navi' *ngIf='authors'>
+    <h3>Favorite Authors</h3>
+    <button class='btn btn-link mx-1' [routerLink]='["/new"]'>Add an author</button>
+    <h6 style='color: purple;'>We have quotes by:</h6>
+    <table class='table table-striped'>
+        <thead>
+            <tr scope='row'>
+                <th scope='col'>Author</th>
+                <th scope='col'>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let author of authors'>
+                <td>{{ author.name }}</td>
+                <td>
+                    <button class='btn btn-sm btn-info mx-1' routerLink='/edit/{{author._id}}'>Edit</button>
+                    <button class='btn btn-sm btn-danger mx-1' (click)='deleteAuthor(author._id)'>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

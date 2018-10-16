@@ -1,0 +1,16 @@
+<div class='container'>
+    <div class='flash' *ngIf='flashMsg'>
+        <p>{{ flashMsg }}</p>
+    </div>
+    <div class='dsp' *ngIf='question'>
+        <h3>Mine ShintoCoins</h3>
+        <h5>Here you can mine ShintoCoins by being the first to solve the algorithm:</h5>
+        <h5 id='qq'>{{ question.question }}</h5>
+        <form (submit)='postAnswer()'>
+            <div class='form-group'>
+                <input type='number' name='answer' [(ngModel)]="answer" />
+                <input type="submit" class='col-3 btn-outline-info mx-1' value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>

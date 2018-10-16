@@ -1,0 +1,16 @@
+<div class='container'>
+    <div class='flash' *ngIf='flashMsg'>
+        <p>{{ flashMsg }}</p>
+    </div>
+    <div class='dsp'>
+        <h3>Buy ShintoCoins</h3>
+        <h5>Current ShintoCoin Value: {{ currentVal }}</h5>
+        <h5 id='sbuy'>Number of ShintoCoins Owned: {{ currentWallet }}</h5>
+        <form (submit)='buyCoins()'>
+            <div class='form-group'>
+                <input type='number' name='purchase' [(ngModel)]="purchase" />
+                <input type="submit" class='col-3 btn-outline-success mx-1' value="Buy" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+
+<div class='navi'>
+    <div class='flash' *ngIf='flashMsg'><p class='{{ flashMsg.type }}'>{{ flashMsg.message }}</p></div>
+    <h3>Favorite Authors</h3>
+    <button class='btn btn-link mx-1' [routerLink]='["/"]'>Home</button>
+    <h6 style='color: purple;'>Add a new author:</h6>
+    <form (submit)='editAuthor()'>
+        <div class='form-group'>
+            <input type='text' class='col-6' name='author.name' [(ngModel)]="author.name" />
+            <input type='hidden' name='id' value='author._id' />
+            <button class='btn btn-sm btn-outline-secondary mx-1' [routerLink]='["/"]'>Cancel</button>
+            <button type="submit" class='btn btn-sm btn-info mx-1'>Submit</button>
+        </div>
+    </form>
+</div>

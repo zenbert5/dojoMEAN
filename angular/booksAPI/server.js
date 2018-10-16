@@ -1,11 +1,10 @@
 /*
- * MEAN angular - BooksAPI CRUD
- * oct 13, 2018
+ * MEAN angular - Shinto Coins 
+ * oct 15, 2018
  * shawn chen
  * codingDojo SJ
  * 
  *  v1.0 - oct 12, 2018
- *  v1.1 - upgraded code on validation and error handling
  */
 
 const express = require('express');
@@ -14,10 +13,10 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/books/dist/books'));
+app.use(express.static(__dirname + '/coins/dist/coins'));
 
 app.listen(8000, function () {
-    console.log("Books API running.. listening on port 8000");
+    console.log("Shinto Coins running.. listening on port 8000");
 })
 
 mongoose.connect('mongodb://localhost/authors', { useNewUrlParser: true });

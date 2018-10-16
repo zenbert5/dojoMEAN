@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.displayLedger {
+    width: 80%;
+    margin-top: 20px;
+    padding: 15px 20px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.showDetails {
+    border: 2px solid gold;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 5px;
+}
