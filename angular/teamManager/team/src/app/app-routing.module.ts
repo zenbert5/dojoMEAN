@@ -17,7 +17,7 @@ const routes: Routes = [
         { path: 'game/:id', component: GameComponent }
     ]},
     { path: '', pathMatch: 'full', redirectTo: '/players/list' },
-    { path: '**', component: AppComponent }
+    { path: '**', redirectTo: '/players/list' }
 ];
 
 @NgModule({

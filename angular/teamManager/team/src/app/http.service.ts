@@ -15,4 +15,12 @@ export class HttpService {
     getAllPlayers() {
         return this._http.get('/players');
     }
+
+    setPlayerStatus(status: object) {
+        return this._http.put('/setStatus', status);
+    }
+
+    deleteThisPlayer(id: string) {
+        return this._http.delete(`/delPlayer/${id}`);
+    }
 }

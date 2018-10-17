@@ -24,4 +24,14 @@ export class ListComponent implements OnInit {
             this.players = data;
         })
     }
+
+    // delete player
+    deletePlayer(id: string) {
+        console.log('deleteing player', id)
+        let observable = this._httpService.deleteThisPlayer(id);
+        observable.subscribe(data => {
+            console.log(`deleted player with result code ${data}`);
+            this.getPlayers();
+        })
+    }
 }
