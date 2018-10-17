@@ -7,11 +7,9 @@ import { HttpService } from './http.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    title = 'ppm';
+    title = 'Ninja PPM';
 
     constructor(private _httpService: HttpService) { }
     ngOnInit() {
-        
-        
     }
 }

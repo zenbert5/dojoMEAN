@@ -1,0 +1,49 @@
+
+.container {
+    margin: 0 auto;
+}
+
+.newCake, .showCakes {
+    height: 350px;
+}
+
+.mainarea {
+    margin: 30px 0;
+}
+
+.error {
+    color: red;
+    font-style: italic;
+}
+
+.success {
+    color: green;
+}
+
+.flash {
+    height: 30px;
+}
+
+.showCakes {
+    overflow: auto;
+}
+
+.listCakes {
+    margin: 10px 0;
+    padding: 10px 0;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.oneBigCake {
+    margin: 10px 0;
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+.oneBigCake img {
+    margin: 0 auto;
+    padding: 20px;
+    width: 90%;
+    border: 2px solid gray;
+}
