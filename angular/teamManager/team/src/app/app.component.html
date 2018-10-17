@@ -1,6 +1,6 @@
-<!-- Product Management -->
+<!-- Team Manager - Oct. 17, 2018 - shawn chen - codingDojo -->
 
-<title>PPM</title>
+<title>Team Manager</title>
 <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -17,10 +17,11 @@
         </h2>
         <img width="100" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
     </div>
-    <div class='navi'>
-        <button class='btn btn-sm btn-outline-secondary mx-3' [routerLink]='["/home"]'>Home</button>
-        <button class='btn btn-sm btn-outline-secondary mx-3' [routerLink]='["/products"]'>Product List</button>
-        <button class='btn btn-sm btn-outline-secondary mx-3' [routerLink]='["/products", "new"]'>Product Creation</button>
+    <div class='topNav'>
+        <button class='btn btn-link mx-3' [routerLink]='["/home"]'><u>Home</u></button><span> &#9734; </span>
+        <button class='btn btn-link mx-3' [routerLink]='["/players", "list"]'><u>Manage Players</u></button><span> &#9734; </span>
+        <button class='btn btn-link mx-3' [routerLink]='["/status", "game", "1"]'><u>Manage Player Status</u></button>
+        <hr />
     </div>
     <router-outlet></router-outlet>
 </div>

@@ -1,3 +1,4 @@
+<router-outlet></router-outlet>
 <div class='container' *ngIf='_httpService.products'>
     <div class='displayProduct'>
         <div class='flash' *ngIf='flashMsg'><p class='{{ flashMsg.type }}'>{{ flashMsg.message }}</p></div>
@@ -15,6 +16,6 @@
         </div>
     </div>
 </div>
-<router-outlet></router-outlet>
+
 
 

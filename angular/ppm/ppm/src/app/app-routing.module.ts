@@ -8,8 +8,8 @@ import { EditComponent } from './products/edit/edit.component';
 import { NewComponent } from './products/new/new.component';
 
 const routes: Routes = [
-    { path: 'home',component: HomeComponent },
-    { path: 'products', component: ProductsComponent, children:[ 
+    { path: 'home', component: HomeComponent },
+    { path: 'products', component: ProductsComponent, children:[
         { path: 'new', component: NewComponent },
         { path: 'edit/:id', component: EditComponent }]},
     { path: '', pathMatch: 'full', redirectTo: '/home' },
