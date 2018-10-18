@@ -1,7 +1,7 @@
 <router-outlet></router-outlet>
 <div class='container' *ngIf='_httpService.products'>
     <div class='displayProduct'>
-        <div class='flash' *ngIf='flashMsg'><p class='{{ flashMsg.type }}'>{{ flashMsg.message }}</p></div>
+        <div class='flash' *ngIf='flashMsg'><p *ngFor='let msg of flashMsg.messages' class='{{ flashMsg.type }}'>{{ msg }}</p></div>
         <h4 class='text-center'>Products List</h4>
         <div class='row'>
             <div class='box col col-lg-3 col-md-4 col-sm-6' *ngFor='let product of _httpService.products'>
