@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
     selector: 'app-products',
@@ -14,11 +14,15 @@ export class ProductsComponent implements OnInit {
     }
     constructor(
         private _httpService: HttpService,
-        private _router: Router
+        private _router: Router,
+        private _route: ActivatedRoute
     ) { }
 
     ngOnInit() {
         this.getProducts();
+        this._route.params.subscribe((params: Params) => {
+            console.log(`routes ${params}`)
+        })
     }
 
     getProducts() {

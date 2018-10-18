@@ -9,7 +9,7 @@
             <div class='form-group'>
                 <label for='player.name'>Player Name:</label>
                 <input type='text' class='form-control' name='player.name' required minlength='2' [(ngModel)]='player.name' #name='ngModel'/>
-                <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-sm alert-danger">
+                <div *ngIf="name.errors && (name.dirty || name.touched)" class="alert alert-sm alert-danger text-right">
                     <div [hidden]="!name.errors.required">
                         Name is required
                     </div>
