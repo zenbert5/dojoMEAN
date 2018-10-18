@@ -1,0 +1,6 @@
+
+Deployed - pub ip - http://52.53.160.146
+
+Oct 17, 2018
+shawn chen
+codingDojo
