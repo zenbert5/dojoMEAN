@@ -1,0 +1,30 @@
+<div class='container' *ngIf='authors'>
+    <div class='displayAuthor'>
+        <div class='flash' *ngIf='flashMsg'>
+            <p *ngFor='let msg of flashMsg.messages' class='{{ flashMsg.type }}'>{{ msg }}</p>
+        </div>
+        <h4 class='text-center'>Quote Ranks</h4>
+        <button class='btn btn-link text-dark mx-3' [routerLink]='["/new"]'><u>Add a quotable author</u></button>
+        <p>We have quotes by:</p>
+    </div>
+    <table class='table text-center'>
+        <thead>
+            <tr style='width: 100%'>
+                <th style='width: 40%'>Author</th>
+                <th style='width: 60%'>Action Available</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let author of authors'>
+                <td style='width: 40%'>
+                    <h5 class='text-info'>{{ author.name }}</h5>
+                </td>
+                <td style='width: 60%'>
+                    <button class='mx-4 col-3 btn btn-sm btn-outline-info' [routerLink]='["/quotes", author._id]'>View
+                        Quotes</button>
+                    <button class='mx-4 col-3 btn btn-sm btn-outline-warning' [routerLink]='["/edit", author._id]'>Edit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

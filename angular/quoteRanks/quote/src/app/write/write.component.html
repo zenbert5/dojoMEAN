@@ -1,0 +1,20 @@
+<div class='container' *ngIf='author'>
+    <div class='flash' *ngIf='flashMsg'>
+        <p *ngFor='let msg of flashMsg.messages' class='{{ flashMsg.type }}'>{{ msg }}</p>
+    </div>
+    <h4 class='text-center'>Quote Ranks</h4>
+    <button class='btn btn-link text-info mx-3' [routerLink]='["/home"]'><u>Home</u></button>
+    <p>Add a new quote by {{ author.name }}</p>
+    <div class='newQuote'>
+        <form (submit)='addQuote()'>
+            <div class='form-group'>
+                <label for='quote.quote'>Quote:</label>
+                <input type='text' class='form-control' name='quote.quote' [(ngModel)]="quote.quote" />
+            </div>
+            <div class='form-group'>
+                <button class='btn btn-sm btn-outline-secondary mx-1' (click)='addQuote()'>Cancel</button>
+                <button type="submit" class='btn btn-sm btn-info mx-1'>Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

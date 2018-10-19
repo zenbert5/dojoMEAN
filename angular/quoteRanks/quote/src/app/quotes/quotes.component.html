@@ -1,0 +1,35 @@
+<div class='container' >
+    <div class='displayAuthor' *ngIf='author'>
+        <div class='flash' *ngIf='flashMsg'>
+            <p *ngFor='let msg of flashMsg.messages' class='{{ flashMsg.type }}'>{{ msg }}</p>
+        </div>
+        <h4 class='text-center'>Quote Ranks</h4>
+        <button class='btn btn-link text-primary mx-3' [routerLink]='["/home"]'><u>Home</u></button>
+        <button class='btn btn-link text-primary mx-3' [routerLink]='["/write", author._id]'><u>Add a quote</u></button>
+    </div>
+    <div *ngIf='quotes'>
+        <p>We have quotes by {{ author.name }}</p>
+        <table class='table text-center'>
+            <thead>
+                <tr style='width: 100%'>
+                    <th style='width: 35%'>Author</th>
+                    <th style='width: 20%'>Votes</th>
+                    <th style='width: 45%'>Action Available</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let quote of quotes'>
+                    <td style='width: 35%'>
+                        <h5 class='text-info'>{{ quote.quote }}</h5>
+                    </td>
+                    <td style='width: 20%'>{{ quote.votes }}</td>
+                    <td style='width: 45%'>
+                        <button class='mx-4 col-2 btn btn-sm btn-outline-info' (click)='thumbsUp(quote._id)'>Vote Up</button>
+                        <button class='mx-4 col-2 btn btn-sm btn-outline-warning' (click)='thumbsDown(quote._id)'>VoteDown</button>
+                        <button class='mx-4 col-2 btn btn-sm btn-outline-danger' (click)='deleteQuote(quote._id)'>Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

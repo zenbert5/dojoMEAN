@@ -1,0 +1,20 @@
+<div class='container' *ngIf='author'>
+    <div class='displayAuthor'>
+        <div class='flash' *ngIf='flashMsg'>
+            <p *ngFor='let msg of flashMsg.messages' class='{{ flashMsg.type }}'>{{ msg }}</p>
+        </div>
+        <h4 class='text-center'>Quote Ranks</h4>
+        <button class='btn btn-link text-light mx-3' [routerLink]='["/home"]'><u>Home</u></button>
+        <p>Add a new quotable author:</p>
+    </div>
+    <form (submit)='addAuthor()'>
+        <div class='form-group'>
+            <label for='author.name'>Title</label>
+            <input type='text' class='form-control' name='author.name' [(ngModel)]="author.name" />
+        </div>
+        <div class='form-group'>
+            <button class='btn btn-sm btn-outline-secondary mx-1' [routerLink]='["/home"]'>Cancel</button>
+            <button type="submit" class='btn btn-sm btn-info mx-1'>Submit</button>
+        </div>
+    </form>
+</div>
