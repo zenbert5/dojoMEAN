@@ -31,13 +31,14 @@ class Heap {
     showVal() {
         var ref = this.heap;
         for (let i=1; i < ref.length; ++i){
-            console.log(' cell:'+i+' - '+ref[i]);
+            console.log(' cell: ' + i + ' - ' + ref[i]);
         }
         return this;
     }
 }
 
 var box = new Heap();
+
 for (let n=0; n<10; n++) {
     box.addVal(Math.floor(Math.random() * 50) + 1);
 }
