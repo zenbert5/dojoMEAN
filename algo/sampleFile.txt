@@ -1,0 +1,6 @@
+﻿This is a quick test
+Basic JS
+John is a chicken
+Rob is a turkey
+Joanne is a chicken
+Greg is cheesy
