@@ -18,7 +18,7 @@ var NumArr = function() {
         var me = this;
 
         if (!this.arr) {
-            return this.arr;
+            return this;
         }
 
         var head = 0;
