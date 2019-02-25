@@ -54,7 +54,7 @@ function runningTime(arr) {
 }
 
 function main() {
-    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+/*     const ws = fs.createWriteStream(process.env.OUTPUT_PATH); */
 
     const n = parseInt(readLine(), 10);
 
@@ -62,7 +62,9 @@ function main() {
 
     let result = runningTime(arr);
 
-    ws.write(result + "\n");
+    console.log(result + '\n');
 
-    ws.end();
+/*     ws.write(result + "\n");
+
+    ws.end(); */
 }
