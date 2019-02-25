@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+
 process.stdin.resume();
 process.stdin.setEncoding('utf-8');
 
@@ -22,14 +24,14 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-// Complete the insertionSort2 function below.
-function insertionSort2(n, arr) {
-    if (n === 1) {
-        console.log(arr.join(' '));
-        return;
+// Complete the runningTime function below.
+function runningTime(arr) {
+    let arrLen = arr.length;
+    if (arrLen === 1) {
+        return 0;
     }
     let numShift = 0;
-    for (let x = 1; x < n; x++) {
+    for (let x = 1; x < arrLen; x++) {
         let originIndex = x;
         let targetIndex = x;
         let currShift = 0;
@@ -46,15 +48,21 @@ function insertionSort2(n, arr) {
             let valToInsert = arr.splice(originIndex, 1)[0];
             arr.splice(targetIndex, 0, valToInsert);
         }
-        console.log(arr.join(' '));
-        console.log(numShift);
+        // console.log(arr.join(' '));
     }
+    return numShift;
 }
 
 function main() {
+    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+
     const n = parseInt(readLine(), 10);
 
     const arr = readLine().split(' ').map(arrTemp => parseInt(arrTemp, 10));
 
-    insertionSort2(n, arr);
+    let result = runningTime(arr);
+
+    ws.write(result + "\n");
+
+    ws.end();
 }
